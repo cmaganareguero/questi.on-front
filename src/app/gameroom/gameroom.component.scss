@@ -1,0 +1,325 @@
+* {
+  padding:0;
+  margin:0;
+}
+
+.top-zone {
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  background-color: #fcfcfcfa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para el contenedor pequeño */
+
+
+  .top-left-zone {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+  
+    img {
+      padding-left: 1rem;
+      height: 45px;
+      width: 230px;
+    }
+  }
+
+  .top-right-zone {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50%; /* Ambos elementos ocuparán el 50% del ancho de .top-zone */
+    height: 100%; /* Asegura que ocupen toda la altura de .top-zone */
+
+    .user-header {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      padding-left: 13px;
+      border-radius: 25px;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    
+      &:hover {
+        background-color: #fcfcfc;
+      }
+    
+      .username {
+        font-size: 16px;
+        color: #333;
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+    
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* Asegura que la imagen ocupe todo el contenedor circular */
+          border-radius: 50%; /* Hace la imagen circular */
+        }
+      }
+    }
+
+  }
+}
+
+.middle-zone {
+  .header-section {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    background-color: #ffffff; /* Fondo para el título */
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+    .back-content {
+      position: absolute;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      a {
+        display: flex;
+        align-items: flex-start;
+  
+        .back-icon {
+          color: #469bd4; 
+          transition: transform 0.3s ease;
+          cursor: pointer;
+  
+          &:hover {
+            transform: scale(1.2); /* Efecto de zoom al pasar el ratón */
+          }
+        }
+      }
+    }
+  }
+}
+
+.fullgame {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 75vh;
+  padding-top: 4vh;
+  
+  .gamezone {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    .category {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 14%;
+      width: 73%;
+      background-color: #88b3c5;
+  
+      h1{
+        margin: 0px;
+        color: #ffffff;
+      }
+    }
+  
+  
+    .left-game {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      height: 70%;
+      width: 73%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background-color: transparent;
+  
+  
+      .card-title {
+        margin-top: 30px; /* Ajusta el espacio desde el top */
+        margin-bottom: 20px; /* Ajusta el espacio desde el top */
+        text-align: center; /* Centra el texto horizontalmente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      .mat-mdc-card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+  
+      .answers-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+        grid-template-rows: auto auto;  /* 2 filas automáticas */
+        width: 80%;
+        height: 100%; /* Resta el espacio reservado para el botón */
+        align-items: center;
+        justify-items: center; /* Centra los elementos en cada celda */
+        gap: 8px; /* Espaciado uniforme entre filas y columnas */
+
+        button {
+          width: 80%; /* Ocupa el 100% de la celda */
+          height: 30%;
+          max-width: 100%; /* Asegura que el botón no sobresalga */
+          padding: 10px;
+          background-color: #88b3c5;
+          color: #FFFFFF;
+          text-align: center;
+          word-wrap: break-word;
+          transition: transform 0.3s ease; /* Transición para hover */
+        }
+      }
+  
+      .next-question-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 8px;
+        height: 100%;
+        text-align: center;
+        padding-bottom: 65px;
+      }
+  
+      .next-question-container button {
+        width: auto;
+      }
+    }
+  }
+  
+  button.correct {
+    background-color: green !important;
+  }
+  
+  button.incorrect {
+    background-color: red !important;
+  }
+  
+  .example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+  
+  .example-card {
+    margin-bottom: 10px;
+  }
+
+  .info-zone {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+
+    .progress-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 20%;
+      text-align: center;
+
+      .progress-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: transparent; 
+        border: 5px solid #88b3c5; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+        margin-bottom: 16px;
+      }
+      
+
+      .next-button,
+      .info-button {
+        width: 100%;
+        margin-bottom: 12px;
+        background-color: #f5f5f5;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:disabled {
+          background-color: #e0e0e0;
+          color: #999;
+        }
+      }
+
+      .additional-info {
+        margin-top: 16px;
+        padding: 12px;
+
+      }
+    }
+
+    .info-buttons {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+      height: 20%;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .addittional-info-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      height: 50%;
+
+      .additional-info{
+        display: flex;
+        justify-content: center; /* Centra el contenido horizontalmente */
+        align-items: center; /* Centra el contenido verticalmente */
+        height: 90%;
+        width: 80%;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px; /* Añade espacio alrededor del texto */
+        text-align: center; /* Centra el texto horizontalmente */
+      }
+    }
+
+  }
+
+}
+
+

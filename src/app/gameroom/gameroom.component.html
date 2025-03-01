@@ -1,0 +1,111 @@
+
+  <div class="top-zone">
+    <div class="top-left-zone">
+        <img src="assets/logo.png" alt="Logo" class="clickable-logo">
+    </div>
+
+    <div class="top-right-zone">
+      <div class="user-header" (click)="openConfirmDialog('/profile')">
+        <div class="username">{{ username }}</div>
+        <div class="profile-pic">
+          <img [src]="profilePicUrl" alt="Foto de perfil" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="middle-zone">
+    <div class="header-section">
+      <div class="back-content">
+        <a (click)="openConfirmDialog('/dashboard')">
+          <mat-icon class="back-icon">keyboard_arrow_left</mat-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="fullgame"> 
+    
+    <div class="gamezone">
+      @if (currentGame) {
+    
+        <div class="category">
+            <h1> {{ currentGame.category }} </h1>
+        </div>
+  
+    
+        <mat-card class="left-game">
+          <mat-card-header>
+            <mat-card-title class="card-title">{{ currentQuestion ? currentQuestion.question : 'Preguntas' }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if(currentQuestion) {
+              <div class="answers-container">
+                    @for(option of currentQuestion.answers; track option.length) {
+                      <button mat-button (click)="selectOption(option)" [disabled]="selectedOption !== null"
+                      [ngClass]="{'correct': isCorrectOption(option), 'incorrect': isIncorrectOption(option)}">
+                        {{ option }}
+                      </button>
+                    }
+              </div>
+            }
+            @if(!currentQuestion) {
+              <div class="next-question-container">
+                <div>
+                  <mat-card-title>Partida finalizada.</mat-card-title>
+                  <mat-card-title>Aciertos: {{successes}}</mat-card-title>
+                  <mat-card-title>Fallos: {{currentGame.numQuestions - successes}}</mat-card-title>
+                </div>
+                <button mat-button (click)="startNewGame()">Nueva partida</button>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+    
+      @if (!showQuestions || !currentGame) {
+        <div>
+          <p>No se han cargado preguntas todavía.</p>
+        </div>
+      }
+    </div> 
+
+    <div class="info-zone">
+      <div class="progress-container">
+        <div class="progress-circle">
+          {{  + 1 }}/{{ currentGame?.numQuestions }}
+        </div>
+      </div>
+
+      <div class="info-buttons">
+        <button
+        mat-raised-button
+        class="next-button"
+        (click)="nextQuestion()"
+        [disabled]="!selectedOption"
+        >
+        Siguiente pregunta
+        </button>
+        <button
+          mat-raised-button
+          class="info-button"
+          (click)="getMoreInfo()"
+          [disabled]="!selectedOption"
+        >
+          Obtener información adicional
+        </button>
+      </div>
+      
+      <div class="addittional-info-container">
+        <div class="additional-info" *ngIf="additionalInfo">
+          <h3>
+            {{ additionalInfo }}
+          </h3> 
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  
+

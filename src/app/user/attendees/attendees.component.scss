@@ -1,0 +1,28 @@
+.videoslist-content {
+
+    .default-games {
+        display: grid;
+        box-sizing: border-box;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: minmax(0, auto);
+        column-gap: 50px;
+        row-gap: 25px;
+        padding-left: 4%;
+        padding-right: 4%;
+        padding-top: 4%;
+        justify-content: space-between; /* Ajusta la distribución de las columnas */
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+    }
+}

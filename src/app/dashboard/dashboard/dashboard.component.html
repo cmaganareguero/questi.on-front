@@ -1,0 +1,102 @@
+<div class="first-back">
+
+  <div class="top-zone">
+
+    <div class="top-left-zone">
+      <a [routerLink]="['/dashboard']">
+        <img src="assets/logo.png" alt="Logo" class="clickable-logo">
+      </a>
+    </div>
+
+    <div class="top-right-zone">
+      <div class="user-header" [routerLink]="['/profile']">
+        <div class="username">{{ username }}</div>
+        <div class="profile-pic">
+          <img [src]="profilePicUrl" alt="Foto de perfil" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="middle-zone">
+
+    <div class="info-dialog">
+        <div class="text-content">
+            <h1>¡Bienvenido a Questi.on!</h1>
+
+            <p>Ponte a prueba en categorías diversas con preguntas generadas en tiempo real por una inteligencia artificial avanzada. Cuanto más específica sea tu elección de categoría, ¡mejores serán las preguntas!</p>
+        
+            <hr>  
+
+            <p>Las preguntas son creadas por GPT-4 de OpenAI, un modelo de IA de última generación con conocimientos hasta septiembre de 2021. Por eso, las categorías sobre eventos muy recientes pueden no estar totalmente actualizadas.</p>
+        
+            <p>Aunque la IA se esfuerza por ofrecer respuestas precisas, el contenido generado puede contener algunos errores.</p>
+        
+            <a mat-button mat-raised-button class="mat-button boton-color" (click)="openDialog()">
+              <span>¡JUGAR!</span>
+            </a>
+          </div>
+    </div>
+
+    <div class="img-dialog">
+      <div class="round-container"> 
+        <img src="assets/1.png" alt="Imagen de ejemplo">
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-zone">
+
+    <div class="last-games">
+
+      <div class="aciertosfallos-tab">
+
+        <div class="aciertosfallos-img">
+          <img src="assets/2.png">
+        </div>
+        <div class="aciertosfallos-buttom">
+            <a mat-button mat-raised-button class="mat-button boton-color" href="/statsroom">
+              <span>ACCEDE A LAS ESTADISTICAS COMPLETAS</span>
+            </a>
+        </div>
+
+        <div class="aciertosfallos-text">
+          <p>ESTA SEMANA HAS CONSEGUIDO:</p>
+          <p>53</p>
+          <p>ACIERTOS</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="stats-zone">
+      <div class="aciertosfallos-tab">
+
+        <div class="aciertosfallos-img">
+          <img src="assets/opcion1.png">
+        </div>
+        <div class="aciertosfallos-buttom">
+              <span>CATEGORIA TRUCU TRUCUTU</span>
+        </div>
+
+        <div class="aciertosfallos-text">
+          <div class="aciertos">
+            <h1>ACIERTOS:</h1>
+          </div>
+          <div class="fallos">
+            <h1>FALLOS:</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+  </div>
+
+</div>
+    
+
+
+  
+  

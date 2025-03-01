@@ -1,0 +1,50 @@
+  
+  .register {
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      height: 100%;
+      width: 100%;
+    
+      .register-title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 20px;
+        padding-top: 20px;
+      }
+
+      .descripcion {
+        padding-left: 20px;
+      }
+
+    
+      .rolInfo {
+        display: flex;
+        height: 15%;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .levelInfo {
+        display: flex;
+        height: 20%;
+        padding-left: 20px;
+        justify-content: space-around;
+        align-items: center;
+        
+      }
+
+      .register-button-container {
+        display: flex;
+        height: 15%;
+        justify-content: flex-end;
+        align-items: end;
+        padding-right: 50px;
+        button {
+          background-color: #fc6477;
+          color: #ffff;
+        }
+      }
+    }
+    

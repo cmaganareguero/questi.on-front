@@ -1,0 +1,60 @@
+<div class="register">
+    <div class="register-title">
+      <mat-card-title>Partida Personalizada</mat-card-title>
+      <mat-card-subtitle>Introduce la información de la partida</mat-card-subtitle>
+    </div>
+  
+    <form [formGroup]="gameForm">
+      <div class="form-container">
+        <div class="input-container">
+        <p>Categoría</p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Categoría" formControlName="category" required>
+            <mat-error *ngIf="gameForm.get('category')?.invalid">{{ getErrorMessage('category') }}</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="input-container">
+        <p>Número de preguntas</p>
+          <mat-form-field appearance="outline">
+            <input matInput type="number" placeholder="Número de preguntas" formControlName="numQuestions" required>
+            <mat-error *ngIf="gameForm.get('numQuestions')?.invalid">{{ getErrorMessage('numQuestions') }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="input-container">
+          <p>Dificultad</p>
+          <mat-form-field appearance="fill">
+            <mat-label>Escoge una opción</mat-label>
+            <mat-select formControlName="dificultad" required>
+              <mat-option value="facil">Fácil</mat-option>
+              <mat-option value="media">Media</mat-option>
+              <mat-option value="dificil">Dificil</mat-option>
+            </mat-select>
+            <mat-error *ngIf="gameForm.get('dificultad')?.hasError('required')">
+              This field is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="input-container">
+          <p>Tipo de partida</p>
+          <mat-form-field appearance="fill">
+            <mat-label>Escoge una opción</mat-label>
+            <mat-select formControlName="numAnswers" required>
+              <mat-option value="VERDADERO_FALSO">Verdadero/Falso</mat-option>
+              <mat-option value="CUATRO_RESPUESTAS">Elección múltiple (4 respuestas)</mat-option>
+            </mat-select>
+            <mat-error *ngIf="gameForm.get('numAnswers')?.hasError('required')">
+              This field is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+    </form>
+    <div class="register-button-container">
+        <button mat-raised-button type="submit" (click)="startGame()">COMENZAR</button>
+      </div>
+  </div>
+  

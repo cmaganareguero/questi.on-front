@@ -1,0 +1,23 @@
+.stats-container {
+    height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Apila el título encima del gráfico */
+  align-items: center;
+  justify-content: flex-start; /* Asegura que el título esté arriba */
+
+    stats-title {
+        margin-bottom: 10px;
+        text-align: center;
+        color: #333; /* Ajusta según tu diseño */
+        font-size: 1.2rem;
+        }
+    
+        .chart-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+}

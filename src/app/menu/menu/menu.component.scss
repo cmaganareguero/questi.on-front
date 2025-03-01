@@ -1,0 +1,91 @@
+.full-menu {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+mat-toolbar {
+  color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-sidenav-container {
+  height: 93%;
+}
+
+mat-sidenav {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 200px;
+  height: 100%;
+  color: #424242;
+
+  .lateral-menu-top {
+    display: flex;
+    flex-direction: column;
+    margin-top: 11%;
+    margin-left: 14%;
+    height: 10%;
+  }
+
+  .lateral-menu-middle {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7%;
+    margin-left: 14%;
+    height: 15%;
+  }
+
+  .lateral-menu-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    height: 67%;
+
+    .lateral-menu-item {
+      margin-top: 5%;
+      margin-left: 14%;
+      margin-bottom: 7%;
+    }
+  }
+
+  .lateral-separator {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    hr {
+      width: 85%;
+    }
+  }
+
+  .lateral-menu-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 7%;
+
+    &:hover {
+      background-color: #ffffff; // Cambia el color a tu preferencia
+      cursor: pointer;
+      border-radius: 2px; // Ajusta el valor para redondear las esquinas
+      width: auto; // Ajusta la anchura a la mitad
+    }
+
+    p {
+      margin-top: 6px;
+      margin-bottom: 0px;
+    }
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+
+}
+
+

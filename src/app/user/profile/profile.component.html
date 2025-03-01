@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="back-content">
+    <a href="/dashboard">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+  </div>  
+
+  <div class="top">
+    <div class="fav-categories">
+      <mat-card class="category-card">
+        <div class="category-list" #categoryList>
+          <!-- Utilizando el componente app-categoria para mostrar todas las categorías -->
+          @for (game of playedGames; track game) {
+            <app-cardfield class="cat" [game]="game"></app-cardfield>
+          }
+        </div>
+      </mat-card>
+    </div>  
+
+    <div class="profile-container" >
+      <img [src]="userImageUrl" alt="User Image" class="user-image" (click)="openImageUploader()" />
+      <h2>Nombre:</h2> {{data.name}}
+      <h2>Email:</h2> {{data.email}}
+    </div>
+  </div>
+</div>

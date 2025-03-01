@@ -1,0 +1,23 @@
+.field {
+    width: 100%;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .left-text {
+    margin: 0; /* Elimina el margen por defecto del párrafo */
+  }
+  
+  .button-group {
+    display: flex;
+  }
+  
+  /* Ajustes de estilo para los botones */
+  .mat-icon-button {
+    margin-left: 5px; /* Añade un pequeño espacio entre los botones */
+  }
+  
