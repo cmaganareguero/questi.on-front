@@ -3,7 +3,10 @@ import { PopUpComponent } from '../../pop-up/pop-up.component';
 
 
 import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CardfieldComponent } from '../../cardfield/cardfield.component';
 import { UserService } from '../../../services/user.service';
@@ -12,13 +15,14 @@ import { AuthorizationService } from '../../../services/authorization.service';
 import { GameUser } from '../../interfaces/user';
 import { GameService } from '../../../services/game.service';
 import { FinishedGame } from '../../interfaces';
+import { StatsroomComponent } from '../../statsroom/statsroom.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
   standalone: true,
-  imports: [MatIconModule, MatCardModule, PopUpComponent, MatButtonModule, CardfieldComponent, HttpClientModule],
+  imports: [MatIconModule, StatsroomComponent, MatTabsModule,MatFormFieldModule,MatInputModule, MatCardModule, PopUpComponent, MatButtonModule, CardfieldComponent, HttpClientModule],
   providers: [UserService, AuthorizationService, GameService]
 })
 export class ProfileComponent {

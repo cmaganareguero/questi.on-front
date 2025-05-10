@@ -1,51 +1,63 @@
-
-  <div class="top-zone">
-    <div class="top-left-zone">
-      <a [routerLink]="['/dashboard']">
-        <img src="assets/logo.png" alt="Logo" class="clickable-logo">
-      </a>
+  <div class="header-section">
+    <div class="back-content">
+      <h1>ESTADÍSTICAS GENERALES</h1>
     </div>
 
-    <div class="top-right-zone">
-      <div class="user-header" [routerLink]="['/profile']">
-        <div class="username">{{ username }}</div>
-        <div class="profile-pic">
-          <img [src]="profilePicUrl" alt="Foto de perfil" />
+    <div class="info-cards">
+      <mat-card class="info-card">
+        <div class="card-content">
+          <div class="card-text">
+            <div class="value">120</div>
+            <div class="label">PREGUNTAS RESPONDIDAS</div>
+          </div>
         </div>
-      </div>
+      </mat-card>
+      <mat-card class="info-card">
+        <div class="card-content">
+          <div class="card-text">
+            <div class="value">100</div>
+            <div class="label">ACIERTOS</div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="info-card">
+        <div class="card-content">
+          <div class="card-text">
+            <div class="value">20</div>
+            <div class="label">FALLOS</div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="other">
     </div>
   </div>
 
   <div class="middle-zone">
-    <div class="header-section">
-      <div class="back-content">
-        <a [routerLink]="['/dashboard']">
-          <mat-icon class="back-icon">keyboard_arrow_left</mat-icon>
-        </a>
-      </div>
-      <h1 class="section-title">ESTADÍSTICAS GENERALES</h1>
-    </div>
-    <div class="a">
-      <div class="stats-wrapper">
-        <app-stats [data]="mothStatsData" [title]="'ACIERTOS Y FALLOS TOTALES'" [chartType]="'month'"></app-stats>
-      </div>
-    </div>
-    <div class="b">
-      <div class="stats-wrapper">
-        <app-stats [data]="difficultyStatsData" [title]="'ACIERTOS Y FALLOS POR DIFICULTAD'" [chartType]="'difficulty'"></app-stats>
-      </div>
-    </div>
-    <div class="c">
-      <div class="stats-wrapper">
-        <app-stats [data]="mothStatsData" [title]="'Aciertos y fallos mensual'" [chartType]="'month'"></app-stats>
-      </div>
-    </div>
-    <div class="d">
-      <div class="stats-wrapper">
-        <app-stats [data]="mothStatsData" [title]="'Gráfica 4'" [chartType]="'month'"></app-stats>
+    <div class="stats">
+        <div class="a">
+          <div class="stats-wrapper">
+            <app-stats [data]="mothStatsData" [title]="'ACIERTOS Y FALLOS TOTALES'" [chartType]="'month'"></app-stats>
+          </div>
+        </div>
+        <div class="b">
+          <div class="stats-wrapper">
+            <app-stats [data]="difficultyStatsData" [title]="'ACIERTOS Y FALLOS POR DIFICULTAD'" [chartType]="'difficulty'"></app-stats>
+          </div>
+        </div>
+        <div class="c">
+          <div class="stats-wrapper">
+            <app-stats [data]="mothStatsData" [title]="'Aciertos y fallos mensual'" [chartType]="'month'"></app-stats>
+          </div>
+        </div>
+        <div class="d">
+          <div class="stats-wrapper">
+            <app-stats [data]="mothStatsData" [title]="'Gráfica 4'" [chartType]="'month'"></app-stats>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+    
   
 
   <div class="footer">

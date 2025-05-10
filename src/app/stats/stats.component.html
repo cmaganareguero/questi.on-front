@@ -1,27 +1,30 @@
-<div class="stats-container">
+<mat-card class="stats-card">
+  <div class="stats-container">
 
-  <div class="stats-title">
-    <h3>{{ title }}</h3>
+    <div class="stats-title">
+      <h3>{{ title }}</h3>
+    </div>
+  
+    <div style="grid-area: two; display: flex; width: 100%; height: 100%; justify-content: center;">
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="'Mes'"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="chartData"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
+    </ngx-charts-line-chart>
+  
+    </div>
+  
   </div>
+</mat-card>
 
-  <div style="grid-area: two; display: flex; width: 100%; height: 100%; justify-content: center;">
-    <ngx-charts-line-chart
-      [view]="view"
-      [scheme]="colorScheme"
-      [legend]="legend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxis]="xAxis"
-      [yAxis]="yAxis"
-      [xAxisLabel]="'Mes'"
-      [yAxisLabel]="yAxisLabel"
-      [timeline]="timeline"
-      [results]="chartData"
-      (select)="onSelect($event)"
-      (activate)="onActivate($event)"
-      (deactivate)="onDeactivate($event)">
-  </ngx-charts-line-chart>
-
-  </div>
-
-</div>

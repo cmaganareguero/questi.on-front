@@ -1,97 +1,91 @@
-.content {
+.profile-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 85vh;
+  padding-top: 100px;
+  background-color: #ffffff;
 
-    width: 100%;
-    height: 100%;
+  .profile-card {
+    width: 25%;
+    height: 80%;
+    background-color: rgb(185, 207, 236);
 
-      .back-content {
-          display: flex;
-          align-items: center;
-          height: 7%;
-          margin-left: 5%;
-          padding-bottom: 1%;
-          padding-top: 1%;
-          mat-icon {
-              color: #fc5b6f;
-          }   
-      }
+    .profile-header {
+      position: relative;
+      background-color: rgb(182, 182, 224);
+      height: 80px;
 
-      .top {
-        display: flex;
-        height: 80%;
-
-        .fav-categories {
-          width: 50%; 
-          height: 100%; 
-          display: flex;
-          align-items: center;
-          justify-content: center;
-    
-            .category-card {
-            position: relative; /* Para que los elementos secundarios se posicionen relativamente a este contenedor */
-            width: 80%; 
-            height: 100%;  
-            left: 12.5%;
-            overflow-y: auto;
-    
-              .button-zone{
-                display: flex;
-                justify-content: end;
-                height: 10%;
-                padding-top: 3px;
-                padding-right: 3px;
-              }
-    
-              .category-list {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                height: 100%;
-                width: 100%;
-                padding: 16px;
-                gap: 12px;
-                box-sizing: border-box;
-                background-color: lightgray;
-                overflow: auto;
-                  .cat {
-                    width: 100%;
-                    padding-bottom: 3px;
-                  }
-              }
-            }
-        }
-    
-        .profile-container {
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          gap: 16px;
-          width: 50%;
-          top: 12.5%;
-          right: 20%;
-          height: 100%;  
-        }
-          
-        .user-image {
-          width: 200px; 
-          height: 200px; 
-          border-radius: 50%;
-          border: 2px solid #fff; // Ajusta el grosor y color del borde
+      .profile-photo {
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid white;
+          img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
+    }
 
-    
+    .profile-info {
+      padding: 20px;
+      text-align: center;
 
-    .down {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 80%;
-      width: 100%;
+      .username {
+        font-size: 24px;
+        font-weight: bold;
+      }
 
-      .user-settings {
-        height: 90%;
-        width: 90%;
+      .location,
+      .job-title,
+      .education {
+        font-size: 16px;
+        color: #888;
+      }
+
+      .bio {
+        margin-top: 16px;
+        font-size: 14px;
+        color: #666;
+      }
+      
+      .connect-btn {
+        margin-top: 20px;
       }
 
     }
+  }
+
+  .stats-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 90%;
+    background-color: rgb(185, 207, 236);
+
+      .graficas {
+        width: 100%;
+        height: 100%;
+
+      }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+

@@ -25,9 +25,33 @@
 
     min-height: 100vh;
     width: 100%;
-    background-color: #ffffff;
-    background-image: url('/assets/backlogin.png');
+    background-image: url('/assets/register_login.png');
     background-size: cover; /* La imagen se expande para cubrir todo el contenedor */
+
+    .login-left {
+        height: 2%; /* Ajusta la altura de la barra */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .app-name {
+            font-weight: bold;
+            font-size: 18px;
+            color: black; /* El texto de "QUESTI.ON" en negro */
+          }
+          
+          .example-spacer {
+            flex: 1;
+          }
+          
+          .perfil-btn {
+            background-color: #6caeda !important; /* Color azul para el botón de 'PERFIL' */
+            color: white !important; /* Texto blanco en el botón de 'PERFIL' */
+            &:hover {
+              background-color: #6caeda; /* Un tono más oscuro al pasar el ratón */
+            }
+        }
+    }
 
     .login-right {
         display: flex;

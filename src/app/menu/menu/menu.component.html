@@ -1,50 +1,7 @@
-<div class="full-menu">
-  <mat-toolbar style="background-color: #7189ff;">
-    <button mat-icon-button  class="example-icon" aria-label="Example icon-button with menu icon" (click)="opened=!opened">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>Questio.n</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" [routerLink]="['/profile']">
-      <mat-icon>person</mat-icon>
-    </button>
-  </mat-toolbar>
+<mat-toolbar class="top-bar" [class.hidden]="isHidden">
+  <span class="app-name">QUESTI.ON</span>
+  <span class="example-spacer"></span>
 
-  <mat-sidenav-container style="background-color: #ffffff;">
-    <mat-sidenav style="background-color: #ffffff;" [(opened)]="opened" mode="side">
-      <div class="lateral-menu">
-        <div class="lateral-menu-top">
-          <div class="lateral-menu-item" routerLink="/dashboard">
-            <mat-icon>home</mat-icon> <p> Inicio </p>
-          </div>
-        </div>
-  
-        <div class="lateral-separator">
-          <hr>
-        </div>
-  
-        <div class="lateral-menu-middle">
-          <div class="lateral-menu-item" routerLink="/statsroom">
-            <mat-icon>assessment</mat-icon> <p> Estadisticas </p>
-          </div>
-        </div>
-  
-        <div class="lateral-separator">
-          <hr>
-        </div>
-  
-        <div class="lateral-menu-bottom">
-          
-          <div class="lateral-menu-item" routerLink="/profile">
-            <mat-icon>person</mat-icon> <p> Perfil </p>
-          </div>
-        </div>
-      </div>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
-</div>
+  <!-- Solo botón de 'PERFIL' -->
+  <button mat-raised-button class="perfil-btn" (click)="navigateToProfile()">PERFIL</button>
+</mat-toolbar>

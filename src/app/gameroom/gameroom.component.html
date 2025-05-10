@@ -1,30 +1,4 @@
 
-  <div class="top-zone">
-    <div class="top-left-zone">
-        <img src="assets/logo.png" alt="Logo" class="clickable-logo">
-    </div>
-
-    <div class="top-right-zone">
-      <div class="user-header" (click)="openConfirmDialog('/profile')">
-        <div class="username">{{ username }}</div>
-        <div class="profile-pic">
-          <img [src]="profilePicUrl" alt="Foto de perfil" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="middle-zone">
-    <div class="header-section">
-      <div class="back-content">
-        <a (click)="openConfirmDialog('/dashboard')">
-          <mat-icon class="back-icon">keyboard_arrow_left</mat-icon>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="fullgame"> 
     
     <div class="gamezone">
       @if (currentGame) {
@@ -68,44 +42,41 @@
           <p>No se han cargado preguntas todavía.</p>
         </div>
       }
+
+      <div class="info-zone">
+        <div class="progress-container">
+          <div class="progress-circle">
+            {{  + 1 }}/{{ currentGame?.numQuestions }}
+          </div>
+        </div>
+  
+        <div class="info-buttons">
+          <button
+          mat-raised-button
+          class="next-button"
+          (click)="nextQuestion()"
+          [disabled]="!selectedOption"
+          >
+          Siguiente pregunta
+          </button>
+          <button
+            mat-raised-button
+            class="info-button"
+            (click)="getMoreInfo()"
+            [disabled]="!selectedOption"
+          >
+            Obtener información adicional
+          </button>
+        </div>
+        
+        <div class="addittional-info-container">
+          <div class="additional-info" *ngIf="additionalInfo">
+            <h3>
+              {{ additionalInfo }}
+            </h3> 
+          </div>
+        </div>
+      </div>  
     </div> 
 
-    <div class="info-zone">
-      <div class="progress-container">
-        <div class="progress-circle">
-          {{  + 1 }}/{{ currentGame?.numQuestions }}
-        </div>
-      </div>
-
-      <div class="info-buttons">
-        <button
-        mat-raised-button
-        class="next-button"
-        (click)="nextQuestion()"
-        [disabled]="!selectedOption"
-        >
-        Siguiente pregunta
-        </button>
-        <button
-          mat-raised-button
-          class="info-button"
-          (click)="getMoreInfo()"
-          [disabled]="!selectedOption"
-        >
-          Obtener información adicional
-        </button>
-      </div>
-      
-      <div class="addittional-info-container">
-        <div class="additional-info" *ngIf="additionalInfo">
-          <h3>
-            {{ additionalInfo }}
-          </h3> 
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  
-
+    

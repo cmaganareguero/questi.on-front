@@ -1,91 +1,39 @@
-.full-menu {
-  height: 100%;
-  overflow-y: hidden;
+/* menu.component.scss */
+.top-bar {
+  position: fixed; /* Fija la barra superior */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Asegura que el menú esté por encima del contenido */
+  padding: 0 24px;
+  height: 64px; /* Ajusta la altura de la barra */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white; /* Fondo blanco para el menú */
+  transition: top 0.3s ease; /* Transición suave para el efecto de desvanecimiento */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-mat-toolbar {
-  color: white;
+.app-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: black; /* El texto de "QUESTI.ON" en negro */
 }
 
 .example-spacer {
-  flex: 1 1 auto;
+  flex: 1;
 }
 
-mat-sidenav-container {
-  height: 93%;
+.perfil-btn {
+  background-color: #6caeda !important; /* Color azul para el botón de 'PERFIL' */
+  color: white !important; /* Texto blanco en el botón de 'PERFIL' */
+  &:hover {
+    background-color: #6caeda; /* Un tono más oscuro al pasar el ratón */
+  }
 }
 
-mat-sidenav {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 200px;
-  height: 100%;
-  color: #424242;
-
-  .lateral-menu-top {
-    display: flex;
-    flex-direction: column;
-    margin-top: 11%;
-    margin-left: 14%;
-    height: 10%;
-  }
-
-  .lateral-menu-middle {
-    display: flex;
-    flex-direction: column;
-    margin-top: 7%;
-    margin-left: 14%;
-    height: 15%;
-  }
-
-  .lateral-menu-bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; 
-    height: 67%;
-
-    .lateral-menu-item {
-      margin-top: 5%;
-      margin-left: 14%;
-      margin-bottom: 7%;
-    }
-  }
-
-  .lateral-separator {
-    display: flex;
-    align-items: center;
-    width: 100%;
-
-    hr {
-      width: 85%;
-    }
-  }
-
-  .lateral-menu-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 7%;
-
-    &:hover {
-      background-color: #ffffff; // Cambia el color a tu preferencia
-      cursor: pointer;
-      border-radius: 2px; // Ajusta el valor para redondear las esquinas
-      width: auto; // Ajusta la anchura a la mitad
-    }
-
-    p {
-      margin-top: 6px;
-      margin-bottom: 0px;
-    }
-
-    mat-icon {
-      margin-right: 8px;
-    }
-  }
-
+/* Clase que oculta el menú */
+.hidden {
+  top: -64px; /* Mueve el menú fuera de la pantalla cuando se hace scroll */
 }
-
-

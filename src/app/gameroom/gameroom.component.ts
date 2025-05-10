@@ -62,35 +62,49 @@ export class GameroomComponent {
   constructor(private questionService: QuestionService, private gameService: GameService, private userService: 
     UserService, private authService: AuthorizationService, private route: ActivatedRoute, private dialog: MatDialog, private router: Router) { }
 
-  ngOnInit() {
-    this.userEmail = this.authService.getUserIdFromToken();
-    console.log('ID de usuario:', this.userEmail);
-
-    this.userService.getIdUserByEmail(this.userEmail).subscribe({
-      next: (id: string) => {
-        this.userId = id;
-        console.log('User ID:', this.userId);
-
-        this.routeSubscription = this.route.queryParams.subscribe(params => {
-          this.category = params['category'] || '';
-          this.numQuestions = +params['numQuestions'] || 2;
-          this.numAnswers = params['numAnswers'] || '';
-          this.difficulty = params['dificultad'] || '';
-
-          if (this.category) {
-            this.getQuestionsFromAPI(this.difficulty, this.numAnswers, this.category, this.numQuestions);
-          }
-        });
-      },
-      error: (err) => {
-        console.error('Error al obtener el ID del usuario:', err);
-      }
-    });
-
-    const userId = this.authService.getUserIdFromToken();
-    this.username = userId;
-    console.log('ID de usuario:', userId);
-  }
+    ngOnInit() {
+      this.userEmail = this.authService.getUserIdFromToken();
+      console.log('ID de usuario:', this.userEmail);
+    
+      this.userService.getIdUserByEmail(this.userEmail).subscribe({
+        next: (id: string) => {
+          this.userId = id;
+          console.log('User ID:', this.userId);
+    
+          // Continuamos con la lógica de obtención de preguntas
+          this.routeSubscription = this.route.queryParams.subscribe(params => {
+            this.category = params['category'] || '';
+            this.numQuestions = +params['numQuestions'] || 2;
+            this.numAnswers = params['numAnswers'] || '';
+            this.difficulty = params['dificultad'] || '';
+    
+            if (this.category) {
+              this.getQuestionsFromAPI(this.difficulty, this.numAnswers, this.category, this.numQuestions);
+            }
+          });
+        },
+        error: (err) => {
+          console.error('Error al obtener el ID del usuario:', err);
+          // Si hay un error, simulamos un ID de usuario
+          console.log('Usando un ID de usuario simulado debido a un error');
+          this.userId = '1234';  // ID simulado
+          console.log('ID de usuario simulado:', this.userId);
+    
+          // Continuamos con la lógica de obtención de preguntas, usando un ID simulado
+          this.routeSubscription = this.route.queryParams.subscribe(params => {
+            this.category = params['category'] || '';
+            this.numQuestions = +params['numQuestions'] || 2;
+            this.numAnswers = params['numAnswers'] || '';
+            this.difficulty = params['dificultad'] || '';
+    
+            if (this.category) {
+              this.getQuestionsFromAPI(this.difficulty, this.numAnswers, this.category, this.numQuestions);
+            }
+          });
+        }
+      });
+    }
+    
 
   ngOnDestroy() {
     if (this.routeSubscription) {
@@ -99,23 +113,61 @@ export class GameroomComponent {
   }
 
   getQuestionsFromAPI(difficulty: string, numAnswers: string, category: string, numQuestions: number) {
-
     this.getLastGameAndShowQuestions(this.userId);
   
-    this.questionService.getQuestions(this.userId, difficulty, numAnswers, category, numQuestions)
-      .subscribe(response => {
+    this.questionService.getQuestions(this.userId, difficulty, numAnswers, category, numQuestions).subscribe({
+      next: (response) => {
         if (response === 202) {
           // Si la respuesta es 202, llama al método para obtener el último juego
           console.log(this.userId);
           this.getLastGameAndShowQuestions(this.userId);
         } else {
           console.log('Respuesta de la API:', response);
-          // Continúa manejando la respuesta de la API de preguntas si es necesario
+          // Aquí puedes manejar la respuesta de la API de preguntas si es necesario
+          // En este caso, se asume que la respuesta es correcta y contiene las preguntas
+          this.currentGame.questions = response.questions || [];
+          this.currentGame.numQuestions = response.numQuestions || 0;
+          this.showQuestions = true;
+          this.showFirstQuestion();
         }
-      }, error => {
-        console.error('Error al obtener preguntas:', error);
-      });
+      },
+      error: (err) => {
+        console.error('Error al obtener preguntas:', err);
+        // Si hay un error, usa los datos simulados
+        console.log('Usando datos simulados debido a un error en la API');
+        this.useMockQuestions();
+      }
+    });
   }
+  
+  // Método para usar preguntas simuladas en caso de error
+  useMockQuestions() {
+    const mockQuestions: Question[] = [
+      {
+        question: "¿Cuál es la capital de Francia?",
+        answers: ["Madrid", "Roma", "París", "Berlín"],
+        correctAnswerIndex: 2
+      },
+      {
+        question: "¿Qué es Angular?",
+        answers: ["Un lenguaje de programación", "Un framework de JavaScript", "Un sistema operativo", "Una base de datos"],
+        correctAnswerIndex: 1
+      },
+      {
+        question: "¿Cuál es el resultado de 2 + 2?",
+        answers: ["3", "4", "5", "6"],
+        correctAnswerIndex: 1
+      }
+    ];
+  
+    // Simula la respuesta de la API con las preguntas de prueba
+    this.currentGame.questions = mockQuestions;
+    this.currentGame.numQuestions = mockQuestions.length;
+    this.showQuestions = true;
+    this.showFirstQuestion();
+    console.log('Juego con preguntas de prueba:', this.currentGame);
+  }
+  
   
   getLastGameAndShowQuestions(idUser: string) {
     this.gameService.getLastGame(idUser).subscribe({

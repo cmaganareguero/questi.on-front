@@ -6,13 +6,14 @@ import { DifficultyStatsDto, DifficultyStatsResponse, MonthStatsDto, StatsData }
 import { MatIconModule} from '@angular/material/icon';
 import {RouterModule} from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-statsroom',
   templateUrl: './statsroom.component.html',
   styleUrl: './statsroom.component.scss',
   standalone: true,
-  imports:[StatsComponent, HttpClientModule, MatIconModule, RouterModule, MatButtonModule],
+  imports:[StatsComponent,MatCardModule, HttpClientModule, MatIconModule, RouterModule, MatButtonModule],
   providers: [GameService]
 })
 export class StatsroomComponent {

@@ -1,13 +1,13 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { StatsData, WeekStatsDto, MonthStatsDto, DifficultyStatsDto, DifficultyStatsResponse } from '../interfaces/stats.interface';
-
+import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss',
   standalone: true,
-  imports: [NgxChartsModule],
+  imports: [NgxChartsModule,MatCardModule],
   providers: []
 })
 

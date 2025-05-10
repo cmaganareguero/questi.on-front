@@ -1,98 +1,80 @@
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+
 <div class="first-back">
 
-  <div class="top-zone">
-
-    <div class="top-left-zone">
-      <a [routerLink]="['/dashboard']">
-        <img src="assets/logo.png" alt="Logo" class="clickable-logo">
-      </a>
-    </div>
-
-    <div class="top-right-zone">
-      <div class="user-header" [routerLink]="['/profile']">
-        <div class="username">{{ username }}</div>
-        <div class="profile-pic">
-          <img [src]="profilePicUrl" alt="Foto de perfil" />
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="middle-zone">
-
     <div class="info-dialog">
-        <div class="text-content">
-            <h1>¡Bienvenido a Questi.on!</h1>
-
-            <p>Ponte a prueba en categorías diversas con preguntas generadas en tiempo real por una inteligencia artificial avanzada. Cuanto más específica sea tu elección de categoría, ¡mejores serán las preguntas!</p>
-        
-            <hr>  
-
-            <p>Las preguntas son creadas por GPT-4 de OpenAI, un modelo de IA de última generación con conocimientos hasta septiembre de 2021. Por eso, las categorías sobre eventos muy recientes pueden no estar totalmente actualizadas.</p>
-        
-            <p>Aunque la IA se esfuerza por ofrecer respuestas precisas, el contenido generado puede contener algunos errores.</p>
-        
-            <a mat-button mat-raised-button class="mat-button boton-color" (click)="openDialog()">
-              <span>¡JUGAR!</span>
-            </a>
-          </div>
-    </div>
-
-    <div class="img-dialog">
-      <div class="round-container"> 
-        <img src="assets/1.png" alt="Imagen de ejemplo">
+      <div class="text-content">
+        <h1>¡PRUEBA TUS CONOCIMIENTOS!</h1>
+        <p class="intro-text">
+          Desafíate con una serie de preguntas relacionadas con la categoría de tu elección. 
+          La inteligencia artificial generará preguntas en tiempo real para que pongas a prueba tus conocimientos.
+        </p>
+        <a mat-button mat-raised-button class="mat-button boton-color" (click)="openDialog()">
+          <span>COMENZAR PARTIDA</span>
+        </a>
       </div>
+    </div>
+  
+    <div class="img-dialog">
+      <img src="assets/1.png" alt="Imagen de ejemplo">
     </div>
   </div>
 
   <div class="bottom-zone">
 
-    <div class="last-games">
-
-      <div class="aciertosfallos-tab">
-
-        <div class="aciertosfallos-img">
-          <img src="assets/2.png">
-        </div>
-        <div class="aciertosfallos-buttom">
-            <a mat-button mat-raised-button class="mat-button boton-color" href="/statsroom">
-              <span>ACCEDE A LAS ESTADISTICAS COMPLETAS</span>
-            </a>
-        </div>
-
-        <div class="aciertosfallos-text">
-          <p>ESTA SEMANA HAS CONSEGUIDO:</p>
-          <p>53</p>
-          <p>ACIERTOS</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="stats-zone">
-      <div class="aciertosfallos-tab">
-
-        <div class="aciertosfallos-img">
-          <img src="assets/opcion1.png">
-        </div>
-        <div class="aciertosfallos-buttom">
-              <span>CATEGORIA TRUCU TRUCUTU</span>
-        </div>
-
-        <div class="aciertosfallos-text">
-          <div class="aciertos">
-            <h1>ACIERTOS:</h1>
+    <div class="otro">
+      <div class="stats">
+        <div class="aciertosfallos-tab">
+          <div class="aciertosfallos-icon">
+            <i class="fas fa-chart-line"></i>  <!-- Icono de gráficas -->
           </div>
-          <div class="fallos">
-            <h1>FALLOS:</h1>
+          <div class="aciertosfallos-text">
+            <h1>Accede a las estadísticas</h1>
+            <p>Visualiza tu progreso a raíz de una serie de gráficos personalizados generados a partir de los resultados de tus diferentes partidas jugadas, en el apartado de estadísticas en tu perfil.</p>
           </div>
         </div>
-      </div>
+      </div>    
+
+      <div class="info">
+        <div class="aciertosfallos-tab">
+          <div class="aciertosfallos-icon">
+            <i class="fas fa-chart-line"></i>  <!-- Icono de gráficas -->
+          </div>
+          <div class="aciertosfallos-text">
+            <h1>Accede a las estadísticas</h1>
+            <p>Visualiza tu progreso a raíz de una serie de gráficos personalizados generados a partir de los resultados de tus diferentes partidas jugadas, en el apartado de estadísticas en tu perfil.</p>
+          </div>
+        </div>
+      </div>   
+
+      <div class="nose">
+        <div class="aciertosfallos-tab">
+          <div class="aciertosfallos-icon">
+            <i class="fas fa-chart-line"></i>  <!-- Icono de gráficas -->
+          </div>
+          <div class="aciertosfallos-text">
+            <h1>Accede a las estadísticas</h1>
+            <p>Visualiza tu progreso a raíz de una serie de gráficos personalizados generados a partir de los resultados de tus diferentes partidas jugadas, en el apartado de estadísticas en tu perfil.</p>
+          </div>
+        </div>
+      </div>   
     </div>
   </div>
-
+  
   <div class="footer">
+    <div class="separator"></div>  
+    <div class="social-icons">
+      <i class="fab fa-github"></i>
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-twitter"></i>
+    </div>
+    <p>&copy; 2025</p>
   </div>
+  
 
 </div>
     
