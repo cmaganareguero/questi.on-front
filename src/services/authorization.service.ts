@@ -48,7 +48,10 @@ export class AuthorizationService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwtToken');
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      return localStorage.getItem('jwtToken');
+    }
+    return null;
   }
 
   isAuthenticated(): boolean {

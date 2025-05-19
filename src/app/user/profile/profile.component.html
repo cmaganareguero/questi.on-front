@@ -1,22 +1,65 @@
+<div class="header-section">
+  <div class="back-content">
+    <h1>INFORMACIÓN DE USUARIO</h1>
+  </div>
+</div>
+
 <div class="profile-container">
   
-  <div class="back"></div>
+  <mat-card class="modify-card">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
-  <mat-card class="stats-card">
-    
-    <div class="stats-title">
-      <h3>ESTADÍSTICAS GENERALES</h3>
-    </div>
+      <!-- Título de la sección -->
+      <div class="modify-header">
+        <h2>MI CUENTA</h2>
+      </div>
 
-    <div class="graficas">
-      <app-statsroom></app-statsroom>
-    </div>
+      <!-- Campos del formulario -->
+      <div class="form-fields">
+        <!-- Correo electrónico -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput placeholder="usuario@ejemplo.com" formControlName="email">
+          <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+            {{ getEmailError() }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Separador -->
+        <mat-divider></mat-divider>
+
+        <!-- Sobre mí -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Sobre mí</mat-label>
+          <textarea
+            matInput
+            placeholder="Cuéntanos un poco sobre ti"
+            formControlName="aboutMe"
+            rows="4">
+          </textarea>
+          <mat-error *ngIf="aboutMe.invalid && (aboutMe.dirty || aboutMe.touched)">
+            {{ getAboutMeError() }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Botón de guardar -->
+      <div class="button-row">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="profileForm.invalid">
+          Guardar
+        </button>
+      </div>
+    </form>
   </mat-card>
 
   <mat-card class="profile-card">
     <div class="profile-header">
       <div class="profile-photo">
-        <img src="assets/images/people.png" />
+        <img src="assets/images/defaultUser.png" />
       </div>
     </div>
     

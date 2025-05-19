@@ -36,11 +36,11 @@ export class StatsComponent {
   yAxisLabel: string = 'Cantidad';
   timeline: boolean = true;
 
-  colorScheme: Color = {  // Ajuste aquí
+  colorScheme: Color = {
     name: 'custom',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#5AA454', '#E44D25']
+    domain: ['#4299e1', '#222222'] // Azul para aciertos, negro para fallos
   };
 
   ngOnChanges(changes: SimpleChanges): void {

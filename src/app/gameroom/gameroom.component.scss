@@ -4,96 +4,177 @@
 }
 
   .gamezone {
-    height: 90vh;
-    width: 80%;
+    height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-image: url('/assets/register_login.png');
-    margin-top: 20px;
+    background-image: url('/assets/gameroom.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   
-    .category {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 14%;
+    // .category {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   height: 14%;
+    //   width: 73%;
+    //   background-color: #88b3c5;
+  
+    //   h1{
+    //     margin: 0px;
+    //     color: #ffffff;
+    //   }
+    // }
+
+    .header-section {
+      position: relative;
+      //background-color: #bee3f8; // Azul fuerte
+      height: 10vh;
       width: 73%;
-      background-color: #88b3c5;
-  
-      h1{
-        margin: 0px;
-        color: #ffffff;
-      }
+      display: flex;
+      //flex-direction: column;
+      justify-content: space-around;
+      z-index: 1;
+
+      .back-content {
+        padding-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        height: 15%;
+        width: 50%;
+        h1{
+          font-weight: bold;
+          font-size: 40px;
+          color: #000000; 
+        }
+     }
+
+    .other {
+        padding-top: 30px;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        height: 15%;
+        width: 50%;
+          h1{
+            font-weight: bold;
+            font-size: 40px;
+            color: #2c3748; 
+          }
     }
+  }
   
   
-    .left-game {
+    .card-game-container {
       display: flex;
       align-items: center;
-      flex-direction: column;
-      height: 70%;
+      flex-direction: row;
+      height: 75%;
       width: 73%;
       overflow-y: auto;
       overflow-x: hidden;
-      background-color: transparent;
-  
-  
-      .card-title {
-        margin-top: 30px; /* Ajusta el espacio desde el top */
-        margin-bottom: 20px; /* Ajusta el espacio desde el top */
-        text-align: center; /* Centra el texto horizontalmente */
+      //background-color: green;
+
+      .left {
+        display: flex;
+        justify-content: flex-start;  // antes era center
+        align-items: flex-start; 
+        flex-direction: column;
+        width: 20%;
+        height: 100%;
+
+
+         .game-category {
+            padding: 4px 8px;
+            background-color: #88b3c5;
+            color: #000000;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 30px;
+            margin-bottom: 10px;
+          }
+          .game-difficulty {
+            margin: 30px;
+            margin-top: 0px;
+            padding: 4px 8px;
+            background-color: #88b3c5;
+            color: #000000;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+          }
+      }
+
+      .right {
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-  
-      .mat-mdc-card-content {
-        display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-      }
-  
-      .answers-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
-        grid-template-rows: auto auto;  /* 2 filas automáticas */
         width: 80%;
-        height: 100%; /* Resta el espacio reservado para el botón */
-        align-items: center;
-        justify-items: center; /* Centra los elementos en cada celda */
-        gap: 8px; /* Espaciado uniforme entre filas y columnas */
-
-        button {
-          width: 80%; /* Ocupa el 100% de la celda */
-          height: 30%;
-          max-width: 100%; /* Asegura que el botón no sobresalga */
-          padding: 10px;
-          background-color: #88b3c5;
-          color: #FFFFFF;
-          text-align: center;
-          word-wrap: break-word;
-          transition: transform 0.3s ease; /* Transición para hover */
-        }
-      }
-  
-      .next-question-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: column;
-        gap: 8px;
         height: 100%;
-        text-align: center;
-        padding-bottom: 65px;
-      }
-  
-      .next-question-container button {
-        width: auto;
-      }
+
+        .card-title {
+          width: 100%;
+          height: 20%;
+          margin-top: 30px; /* Ajusta el espacio desde el top */
+          margin-bottom: 20px; /* Ajusta el espacio desde el top */
+          text-align: center; /* Centra el texto horizontalmente */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+    
+        .mat-mdc-card-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          height: 40%;
+        }
+    
+        .answers-container {
+          display: grid;
+          grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+          grid-template-rows: auto auto;  /* 2 filas automáticas */
+          width: 80%;
+          height: 100%; /* Resta el espacio reservado para el botón */
+          align-items: center;
+          justify-items: center; /* Centra los elementos en cada celda */
+          gap: 8px; /* Espaciado uniforme entre filas y columnas */
+
+          button {
+            width: 80%; /* Ocupa el 100% de la celda */
+            height: 30%;
+            max-width: 100%; /* Asegura que el botón no sobresalga */
+            padding: 10px;
+            background-color: #88b3c5;
+            color: #FFFFFF;
+            text-align: center;
+            word-wrap: break-word;
+            transition: transform 0.3s ease; /* Transición para hover */
+          }
+        }
+    
+        .next-question-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-direction: column;
+          gap: 8px;
+          height: 100%;
+          text-align: center;
+          padding-bottom: 65px;
+        }
+    
+        .next-question-container button {
+          width: auto;
+        }
+      } 
     }
   }
   

@@ -3,47 +3,65 @@
     <div class="gamezone">
       @if (currentGame) {
     
-        <div class="category">
+        <!-- <div class="category">
             <h1> {{ currentGame.category }} </h1>
+        </div> -->
+
+        <div class="header-section">
+          <div class="back-content">
+            <h1>QUESTI.ON</h1>
+          </div>
+
+          <div class="other">
+            <button mat-button> SALIR </button>
+            <h1>{{  + 1 }}/{{ currentGame?.numQuestions }}</h1>
+          </div>
         </div>
   
     
-        <mat-card class="left-game">
-          <mat-card-header>
-            <mat-card-title class="card-title">{{ currentQuestion ? currentQuestion.question : 'Preguntas' }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            @if(currentQuestion) {
-              <div class="answers-container">
-                    @for(option of currentQuestion.answers; track option.length) {
-                      <button mat-button (click)="selectOption(option)" [disabled]="selectedOption !== null"
-                      [ngClass]="{'correct': isCorrectOption(option), 'incorrect': isIncorrectOption(option)}">
-                        {{ option }}
-                      </button>
-                    }
-              </div>
-            }
-            @if(!currentQuestion) {
-              <div class="next-question-container">
-                <div>
-                  <mat-card-title>Partida finalizada.</mat-card-title>
-                  <mat-card-title>Aciertos: {{successes}}</mat-card-title>
-                  <mat-card-title>Fallos: {{currentGame.numQuestions - successes}}</mat-card-title>
+        <mat-card class="card-game-container">
+          <div class="left" *ngIf="currentGame">
+            <h3 class="game-category">{{ currentGame.category | uppercase}} </h3>
+            <h3 class="game-difficulty">{{ currentGame.difficulty | uppercase }}</h3>
+          </div>
+          <div class="right">
+              <div class="card-title">{{ currentQuestion ? currentQuestion.question : 'Preguntas' }}</div>
+            <mat-card-content>
+              @if(currentQuestion) {
+                <div class="answers-container">
+                      @for(option of currentQuestion.answers; track option.length) {
+                        <button mat-button (click)="selectOption(option)" [disabled]="selectedOption !== null"
+                        [ngClass]="{'correct': isCorrectOption(option), 'incorrect': isIncorrectOption(option)}">
+                          {{ option }}
+                        </button>
+                      }
                 </div>
-                <button mat-button (click)="startNewGame()">Nueva partida</button>
-              </div>
-            }
-          </mat-card-content>
+              }
+              @if(!currentQuestion) {
+                <div class="next-question-container">
+                  <div>
+                    <mat-card-title>Partida finalizada.</mat-card-title>
+                    <mat-card-title>Aciertos: {{successes}}</mat-card-title>
+                    <mat-card-title>Fallos: {{currentGame.numQuestions - successes}}</mat-card-title>
+                  </div>
+                  <button mat-button (click)="startNewGame()">Nueva partida</button>
+                </div>
+              }
+            </mat-card-content>
+            <div class="game-buttons">
+
+            </div>
+          </div>
         </mat-card>
       }
     
-      @if (!showQuestions || !currentGame) {
+      <!-- @if (!showQuestions || !currentGame) {
         <div>
           <p>No se han cargado preguntas todavía.</p>
         </div>
-      }
+      } -->
 
-      <div class="info-zone">
+      <!-- <div class="info-zone">
         <div class="progress-container">
           <div class="progress-circle">
             {{  + 1 }}/{{ currentGame?.numQuestions }}
@@ -76,7 +94,7 @@
             </h3> 
           </div>
         </div>
-      </div>  
+      </div>   -->
     </div> 
 
     

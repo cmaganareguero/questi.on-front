@@ -1,58 +1,85 @@
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
 
-  <div class="register">
-    <div class="register-right">
-        <mat-card>
-            <div class="register-title">
-              <mat-card-title> Registro </mat-card-title>
-              <mat-card-subtitle> Introduce tu información de usuario</mat-card-subtitle>
-            </div>
-            
-            <mat-card-content>
-              <div class="form-container">
-                <mat-form-field appearance="outline">
-                  <mat-label>Nombre de usuario</mat-label>
-                  <input matInput placeholder="Nombre de usuario" [formControl]="username" required>
-                  @if (username.invalid) {
-                    <mat-error>{{getErrorMessage(username)}}</mat-error>
-                  }
+<div class="register">
 
-                </mat-form-field>
-    
-                <mat-form-field appearance="outline">
-                  <mat-label>Email</mat-label>
-                  <input matInput placeholder="pat@example.com" [formControl]="email" required>
-                  @if(email.invalid) {
-                    <mat-error>{{getErrorMessage(email)}}</mat-error>
-                  }
-                </mat-form-field>
-    
-                <mat-form-field appearance="outline">
-                  <mat-label>Contraseña</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required>
-                  @if(password.invalid) {
-                    <mat-error >{{getErrorMessage(password)}}</mat-error>
-                  }
-                  <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                </mat-form-field>
-    
-                <mat-form-field appearance="outline">
-                  <mat-label>Repetir contraseña</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" [formControl]="confirmPassword" required>
-                  @if(confirmPassword.invalid) {
-                    <mat-error >{{getErrorMessage(confirmPassword)}}</mat-error>
-                  }
-                  <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                </mat-form-field>
-              </div>
-    
-              <div class="register-button-container">
-                <button mat-raised-button (click)="register()">Registrarse</button>
-              </div>
-            </mat-card-content>
-          </mat-card>
+  <!-- Parte superior con nombre y redes sociales -->
+  <div class="register-left">
+    <span class="app-name">QUESTI.ON</span>
+    <div class="social-icons-top">
+      <i class="fab fa-github"></i>
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-twitter"></i>
     </div>
   </div>
+
+  <!-- Formulario de registro -->
+  <div class="register-right">
+    <mat-card class="registerbox">
+
+      <div class="register-title">
+        <mat-card-title>CREA UNA CUENTA</mat-card-title>
+        <mat-card-subtitle>Introduce tu información de usuario</mat-card-subtitle>
+      </div>
+
+      <div class="content">
+        <div class="form-container">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput placeholder="Nombre de usuario" [formControl]="username" required>
+            @if (username.invalid) {
+              <mat-error>{{ getErrorMessage(username) }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="email" required>
+            @if (email.invalid) {
+              <mat-error>{{ getErrorMessage(email) }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+            @if (password.invalid) {
+              <mat-error>{{ getErrorMessage(password) }}</mat-error>
+            }
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Repetir contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="confirmPassword" required>
+            @if (confirmPassword.invalid) {
+              <mat-error>{{ getErrorMessage(confirmPassword) }}</mat-error>
+            }
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </div>
+
+        <div class="register-button-container">
+          <button mat-raised-button (click)="register()">REGISTRARSE</button>
+        </div>
+      </div>
+    </mat-card>
+
+    <div class="login-redirect">
+      <a href="/login" class="login-link">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="separator"></div>
+    <p>&copy; 2025</p>
+  </div>
+
+</div>

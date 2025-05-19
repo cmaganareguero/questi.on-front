@@ -21,13 +21,15 @@ import {MatIconModule} from '@angular/material/icon';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 @Component({
   selector: 'app-gameroom',
   templateUrl: './gameroom.component.html',
   styleUrl: './gameroom.component.scss',
   standalone: true,
-imports: [RouterModule, ExitDialogComponent, MatCardModule, HttpClientModule, MatButtonModule, CommonModule, MatSliderModule, MatProgressSpinnerModule,MatRadioModule, FormsModule, MatIconModule, RouterOutlet, RouterModule ],
+imports: [RouterModule,MatChipsModule, ExitDialogComponent, MatCardModule, HttpClientModule, MatButtonModule, CommonModule, MatSliderModule, MatProgressSpinnerModule,MatRadioModule, FormsModule, MatIconModule, RouterOutlet, RouterModule ],
   providers: [QuestionService, GameService, UserService, AuthorizationService]
 })
 export class GameroomComponent {

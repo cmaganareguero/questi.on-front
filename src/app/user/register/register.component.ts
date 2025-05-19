@@ -38,7 +38,6 @@ export class RegisterComponent {
     if (control === this.email && control.hasError('email')) {
       return 'Correo electrónico no válido';
     }
-    // Puedes agregar más validaciones según sea necesario.
     return '';
   }
 
@@ -59,31 +58,23 @@ export class RegisterComponent {
       this.confirmPassword.value !== null
     ) {
       console.log('Si');
-      // Verificar si las contraseñas coinciden
       if (this.password.value !== this.confirmPassword.value) {
-        // Manejar el caso donde las contraseñas no coinciden
         console.error('Las contraseñas no coinciden');
         return;
       }
         
-        // Crear un objeto de tipo User con los datos del formulario
         const user = {
           name: this.username.value,
           email: this.email.value,
-          password: this.password.value,
-          // Agrega más campos según tu modelo User
-          
+          password: this.password.value,          
         };
   
-        // Llamar al servicio para agregar el nuevo usuario
         this.userService.addUser(user).subscribe(
           (user) => {
-            // Manejar el éxito, por ejemplo, mostrar un mensaje de éxito al usuario
             console.log('Usuario registrado exitosamente:', user);
             this.router.navigate(['/successRegister']);
           },
           (error) => {
-            // Manejar el error, por ejemplo, mostrar un mensaje de error al usuario
             console.error('Error al registrar el usuario:', error);
           }
         );
