@@ -6,63 +6,43 @@
     <div class="info-cards">
       <mat-card class="info-card">
           <div class="card-text">
-            <div class="value">120</div>
+            <div class="value">{{ totalGames }}</div>
             <div class="label">RESPUESTAS</div>
         </div>
       </mat-card>
       <mat-card class="info-card">
           <div class="card-text">
-            <div class="value">100</div>
+            <div class="value">{{ totalSuccesses }}</div>
             <div class="label">ACIERTOS</div>
         </div>
       </mat-card>
       <mat-card class="info-card">
           <div class="card-text">
-            <div class="value">20</div>
+            <div class="value">{{ totalFailures }}</div>
             <div class="label">FALLOS</div>
         </div>
       </mat-card>
     </div>
-    <div class="other">
-    </div>
   </div>
 
   <div class="middle-zone">
-    <div class="stats">
-        <div class="a">
-          <div class="stats-wrapper">
-            <app-stats [data]="mothStatsData" [title]="'ACIERTOS Y FALLOS TOTALES'" [chartType]="'month'"></app-stats>
-          </div>
-        </div>
-        <div class="b">
-          <div class="stats-wrapper">
-            <app-stats [data]="difficultyStatsData" [title]="'ACIERTOS Y FALLOS POR DIFICULTAD'" [chartType]="'difficulty'"></app-stats>
-          </div>
-        </div>
-        <div class="c">
-          <div class="stats-wrapper">
-            <app-stats [data]="mothStatsData" [title]="'Aciertos y fallos mensual'" [chartType]="'month'"></app-stats>
-          </div>
-        </div>
-        <div class="d">
-          <div class="stats-wrapper">
-            <app-stats [data]="mothStatsData" [title]="'Gráfica 4'" [chartType]="'month'"></app-stats>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  
+    <app-stats [data]="difficultyStatsData" [title]="'ACIERTOS Y FALLOS POR DIFICULTAD'" [chartType]="'difficulty'"></app-stats>
+    <app-stats [data]="gameMothStatsData" [title]="'PARTIDAS JUGADAS POR MES'" [chartType]="'games'"></app-stats>
+    <app-stats [data]="mothStatsData" [title]="'ACIERTOS Y FALLOS POR MES'" [chartType]="'month'"></app-stats>
+  </div>
 
-  <div class="footer">
+  <div class="otro">
   </div>
 
 
 
 
 
-    
-        
-    
+
+
+
+
+
+
 
 

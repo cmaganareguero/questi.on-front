@@ -1,142 +1,116 @@
 * {
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
 }
 
-  .header-section {
-    position: relative;
-    background-color: #bee3f8; // Azul fuerte
-    height: 45vh;
-    padding-top: 60px;
+.header-section {
+  position: relative;
+  background-color: #bee3f8;
+  height: 45vh;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 3rem; // espacio para superposición
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 1;
+
+  .back-content {
+    padding-top: 30px;
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
-    z-index: 1;
-
-    .back-content {
-      padding-top: 30px;
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: row;
-      height: 15%;
-      width: 100%;
-      padding-left: 50px;
-      h1{
-        font-weight: bold;
-        font-size: 18px;
-        color: #2c3748; 
-      }
-
+    flex-direction: row;
+    height: 15%;
+    width: 100%;
+    h1 {
+      padding-left: 24px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #2c3748;
     }
+  }
 
-    .info-cards {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-evenly;
-      height: 30%;
-      width: 40%;
-      padding-top: 15px;
-      padding-left: 65px;
-    
-      .info-card {
-        height: 60%;
-        width: 20%;
-        color: #424242;
-        background-color: #ffff; // Ligero fondo blanco translúcido
-        border-radius: 3px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        font-size: 1rem;
-        min-width: 180px;
-        text-align: center;
-        justify-content: center;
-    
-        .card-text {
-          height: 100%;
-          width: 100%;
+  .info-cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 30%;
+    width: 100%;
+    padding-top: 15px;
+    // padding-left: 43px;
+
+    .info-card {
+      height: 75%;
+      width: 20%;
+      color: #424242;
+      background-color: #fff; // blanco sólido
+      border-radius: 3px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      font-size: 1rem;
+      min-width: 180px;
+      text-align: center;
+      justify-content: center;
+
+      .card-text {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        .value {
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-start;
+          align-items: flex-end;
+          justify-content: center;
+          height: 50%;
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #2c3748;
+        }
 
-          .value {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            height: 50%;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2c3748; // Gris oscuro
-          }
-    
-          .label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 50%;
-            font-size: 1rem;
-            color: #8e9eab; // Gris claro
-          }
-  
+        .label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 50%;
+          font-size: 1rem;
+          color: #8e9eab;
         }
       }
     }
-
-    .other {
-      width: 50%;
-    }
   }
 
-  .middle-zone {
-    display: flex;
-    height: 100vh;
-    position: relative;
-    margin-top: -150px; // Sube el bloque hacia el header
-    z-index: 2;
-  
-    .stats{
-      width: 100%;
+  .other {
+    width: 50%;
+  }
+}
+
+.middle-zone {
+      position: relative;
+      z-index: 2;
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
-      grid-template-rows: auto repeat(2, 1fr); /* Una fila automática arriba, luego dos filas iguales */
-      gap: 50px; /* Espaciado entre los elementos */
-      box-sizing: border-box;
+      gap: 20px; /* espacio entre las tarjetas */
+      grid-template-columns: 1fr;
+      width: 100%;
+      height: 200vh;
+      margin-top: -80px;
 
-      grid-template-areas:
-      "header header"
-      "a b"
-      "c d";
-
-      .a,
-      .b,
-      .c,
-      .d {
-        height: 100%;
-        width: 100%;
-
-      .stats-wrapper {
-        height: 100%; /* Ocupa todo el espacio disponible en el grid */
-        display: flex;
-        flex-direction: column; /* Apila el título sobre la gráfica */
-        align-items: center; /* Centra contenido horizontalmente */
-        justify-content: center; /* Centra contenido verticalmente */
-        text-align: center;
-      }
-
-      .stats-container {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center; /* Centra la gráfica dentro de su contenedor */
-        box-sizing: border-box;
-        position: relative;
-      }
-      }
+    @media (min-width: 2000px) {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+        grid-template-rows: repeat(2, auto);   /* 2 filas */
     }
 
-  }
-  
+    app-stats {
+        width: 100%;
+        height: 100%;
+        max-width: 800px; /* o el que quieras */
+        margin: 0 auto;
+        /* demás estilos */
+    }
 
+}
 
-
-
+.otro {
+  height: 20vh;
+}

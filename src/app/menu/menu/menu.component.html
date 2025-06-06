@@ -1,7 +1,20 @@
 <mat-toolbar class="top-bar" [class.hidden]="isHidden">
-  <span class="app-name">QUESTI.ON</span>
+
+  <!-- Botón redondo con icono para estadísticas al lado izquierdo -->
+
+  <span class="app-name" (click)="navigateToDashboard()" style="cursor: pointer;">
+    QUESTI.ON
+  </span>
+
   <span class="example-spacer"></span>
 
-  <!-- Solo botón de 'PERFIL' -->
+  <!-- <button mat-icon-button class="stats-btn" (click)="navigateToStatsroom()" aria-label="Estadísticas">
+    <div class="aciertosfallos-icon">
+      <i class="fas fa-chart-line"></i>
+    </div>
+  </button> -->
+  <!-- Botón de 'PERFIL' -->
+   <button mat-raised-button class="perfil-btn-stats" (click)="navigateToStatsroom()">ESTADÍSTICAS</button>
   <button mat-raised-button class="perfil-btn" (click)="navigateToProfile()">PERFIL</button>
+
 </mat-toolbar>

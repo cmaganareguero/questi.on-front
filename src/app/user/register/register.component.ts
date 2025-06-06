@@ -1,85 +1,126 @@
+// register.component.ts
 import { Component } from '@angular/core';
-import { ReactiveFormsModule,FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
-
-
+import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  styleUrls: ['./register.component.scss'],
   standalone: true,
-  imports: [ MatFormFieldModule, MatInputModule, ReactiveFormsModule,ReactiveFormsModule,MatCardModule, MatIconModule, MatFormFieldModule, ReactiveFormsModule, HttpClientModule, MatButtonModule, CommonModule, MatInputModule,MatSelectModule, MatRadioModule]
-  ,providers: [UserService]
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatIconModule,
+    HttpClientModule,
+    MatButtonModule,
+    CommonModule,
+    MatSelectModule,
+    MatRadioModule,
+  ],
+  providers: [UserService],
 })
 export class RegisterComponent {
-  hide = true;
-  username = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-  confirmPassword = new FormControl('', [Validators.required]);
-  
-  constructor(private userService: UserService, private router: Router) {} // Inyecta el servicio en el constructor
+  // Dos banderas separadas:
+  hidePassword = true;
+  hideConfirmPassword = true;
 
-  getErrorMessage(control: FormControl) {
-    if (control.hasError('required')) {
-      return 'Este campo es obligatorio';
-    }
-    if (control === this.email && control.hasError('email')) {
-      return 'Correo electrónico no válido';
-    }
-    return '';
+  registerForm: FormGroup;
+  errorMessage = '';
+
+constructor(
+  private fb: FormBuilder,
+  private userService: UserService,
+  private router: Router
+) {
+  this.registerForm = this.fb.group({
+    username: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+    confirmPassword: ['', [Validators.required]],
+  });
+}
+
+// Quitamos validador a nivel grupo para que el botón no se deshabilite por mismatch
+
+// Validador manual para contraseñas que se usa solo en onSubmit
+passwordsMatch(): boolean {
+  const pw = this.registerForm.get('password')?.value;
+  const cpw = this.registerForm.get('confirmPassword')?.value;
+  return pw === cpw;
+}
+
+getErrorMessage(control: AbstractControl | null): string {
+  if (!control) return '';
+  if (control.hasError('required')) {
+    return 'Este campo es obligatorio';
+  }
+  if (
+    control === this.registerForm.get('email') &&
+    control.hasError('email')
+  ) {
+    return 'Correo electrónico no válido';
+  }
+  return '';
+}
+
+togglePasswordVisibility(field: 'password' | 'confirmPassword') {
+  if (field === 'password') {
+    this.hidePassword = !this.hidePassword;
+  } else {
+    this.hideConfirmPassword = !this.hideConfirmPassword;
+  }
+}
+
+onSubmit() {
+  if (this.registerForm.invalid) {
+    this.errorMessage = '';
+    return; // Campos obligatorios no completos o inválidos
   }
 
-  togglePasswordVisibility() {
-    this.hide = !this.hide;
+  if (!this.passwordsMatch()) {
+    this.errorMessage = 'Las contraseñas no coinciden';
+    return;
   }
 
-  register() {
-    console.log('Haciendo clic en el botón de registro');
-    if (
-      this.username.valid &&
-      this.email.valid &&
-      this.password.valid &&
-      this.confirmPassword.valid &&
-      this.username.value !== null &&
-      this.email.value !== null &&
-      this.password.value !== null &&
-      this.confirmPassword.value !== null
-    ) {
-      console.log('Si');
-      if (this.password.value !== this.confirmPassword.value) {
-        console.error('Las contraseñas no coinciden');
-        return;
-      }
-        
-        const user = {
-          name: this.username.value,
-          email: this.email.value,
-          password: this.password.value,          
-        };
-  
-        this.userService.addUser(user).subscribe(
-          (user) => {
-            console.log('Usuario registrado exitosamente:', user);
-            this.router.navigate(['/successRegister']);
-          },
-          (error) => {
-            console.error('Error al registrar el usuario:', error);
-          }
-        );
-      } else {
-        console.error('Todos los campos deben tener un valor');
-      }
+  // Si llegó aquí, todo OK
+  this.errorMessage = '';
+
+  const { username, email, password } = this.registerForm.value;
+
+  const newUser = {
+    name: username,
+    email,
+    password,
+  };
+
+  this.userService.addUser(newUser).subscribe(
+    (user) => {
+      console.log('Usuario registrado:', user);
+      this.router.navigate(['/login'], { queryParams: { registered: 'true' } });
+    },
+    (error) => {
+      console.error('Error al registrar:', error);
+      this.errorMessage =
+        'Ha ocurrido un error al registrar. Intenta de nuevo más tarde.';
     }
+  );
+}
 }

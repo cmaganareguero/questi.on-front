@@ -1,116 +1,134 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
-import { StatsData, WeekStatsDto, MonthStatsDto, DifficultyStatsDto, DifficultyStatsResponse } from '../interfaces/stats.interface';
+import {
+  MonthStatsDto,
+  DifficultyStatsDto,
+  GamesPlayedStatsResponse
+} from '../interfaces/stats.interface';
 import { MatCardModule } from '@angular/material/card';
+
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss',
   standalone: true,
-  imports: [NgxChartsModule,MatCardModule],
-  providers: []
+  imports: [NgxChartsModule, MatCardModule]
 })
-
-
 export class StatsComponent {
+  @Input() data:
+    | MonthStatsDto[]
+    | DifficultyStatsDto[]
+    | GamesPlayedStatsResponse[] = [];
+  @Input() title = '';
+  @Input() chartType: 'month' | 'difficulty' | 'games' = 'month';
 
-  @Input() data: MonthStatsDto[] | DifficultyStatsDto[] = [];
-  @Input() title: string = '';
-  @Input() chartType: 'month' | 'difficulty' = 'month';
-  
-  multi: any[] | undefined;
-  multiMonths: any[] | undefined;
-  multiDifficulties: any[] | undefined; // Para manejar los datos de dificultad
-  chartData: any[] | undefined;  // Variable que se usará para los resultados
-  view: [number, number] = [700, 300];  // Ajuste tamaño del gráfico
+  multiMonths: any[] = [];
+  multiDifficulties: any[] = [];
+  multiGames: any[] = [];
+  chartData: any[] = [];
+  view: [number, number] = [700, 300];
 
-  // Chart options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Período';
-  yAxisLabel: string = 'Cantidad';
-  timeline: boolean = true;
+  // Opciones del gráfico
+  legend = true;
+  showLabels = true;
+  animations = true;
+  xAxis = true;
+  yAxis = true;
+  showYAxisLabel = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Mes';
+  yAxisLabel = 'Cantidad';
+  timeline = false;
 
   colorScheme: Color = {
     name: 'custom',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#4299e1', '#222222'] // Azul para aciertos, negro para fallos
+    domain: ['#4299e1', '#222222']
   };
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      this.setChartData(this.data);
+      this.updateChartData();
     }
   }
-  
-  setChartData(data: MonthStatsDto[] | DifficultyStatsDto[]): void {
-    if (this.chartType === 'month' && Array.isArray(data)) {
-      this.setMonthData(data as MonthStatsDto[]);
-    } else if (this.chartType === 'difficulty' && Array.isArray(data)) {
-      this.setDifficultyData(data as DifficultyStatsDto[]);
-    } else {
-      console.error('Tipo de datos no compatible con el gráfico:', data);
+
+  private updateChartData(): void {
+    switch (this.chartType) {
+      case 'month':
+        this.buildMonthSeries(this.data as MonthStatsDto[]);
+        this.chartData = this.multiMonths;
+        this.yAxisLabel = 'Cantidad';
+        break;
+
+      case 'difficulty':
+        this.buildDifficultySeries(this.data as DifficultyStatsDto[]);
+        this.chartData = this.multiDifficulties;
+        this.yAxisLabel = 'Cantidad';
+        break;
+
+      case 'games':
+        this.buildGamesSeries(this.data as GamesPlayedStatsResponse[]);
+        this.chartData = this.multiGames;
+        this.yAxisLabel = 'N.º de partidas';
+        break;
+
+      default:
+        this.chartData = [];
+        break;
     }
-    this.chartData = this.chartType === 'month' ? this.multiMonths : this.multiDifficulties;
   }
-  
-  setMonthData(monthStatsData: MonthStatsDto[]): void {
+
+  private buildMonthSeries(monthData: MonthStatsDto[]): void {
     this.multiMonths = [
       {
         name: 'Aciertos',
-        series: monthStatsData.map((monthStats) => ({
-          name: monthStats.month,
-          value: monthStats.totalMonthSuccesses || 0,
-        })),
+        series: monthData.map((m) => ({
+          name: m.month,
+          value: m.totalMonthSuccesses || 0
+        }))
       },
       {
         name: 'Fallos',
-        series: monthStatsData.map((monthStats) => ({
-          name: monthStats.month,
-          value: monthStats.totalMonthFailures || 0,
-        })),
-      },
+        series: monthData.map((m) => ({
+          name: m.month,
+          value: m.totalMonthFailures || 0
+        }))
+      }
     ];
   }
 
-  setDifficultyData(difficultyStatsData: DifficultyStatsDto[]): void {
-    // Verifica los datos antes de procesarlos
-    console.log('Datos de dificultad recibidos:', difficultyStatsData);
-  
-    if (!difficultyStatsData || difficultyStatsData.length === 0) {
-      console.error('No se recibieron datos válidos de dificultad.');
-      return;
-    }
-  
-    // Procesa los datos para el gráfico
+  private buildDifficultySeries(diffData: DifficultyStatsDto[]): void {
     this.multiDifficulties = [
       {
         name: 'Aciertos',
-        series: difficultyStatsData.map((difficultyStats) => ({
-          name: difficultyStats.difficulty,   // Este es el nombre de la dificultad
-          value: difficultyStats.totalSuccesses || 0,  // Este es el valor de los aciertos
-        })),
+        series: diffData.map((d) => ({
+          name: d.difficulty,
+          value: d.totalSuccesses || 0
+        }))
       },
       {
         name: 'Fallos',
-        series: difficultyStatsData.map((difficultyStats) => ({
-          name: difficultyStats.difficulty,  // Este es el nombre de la dificultad
-          value: difficultyStats.totalFailures || 0, // Este es el valor de los fallos
-        })),
-      },
+        series: diffData.map((d) => ({
+          name: d.difficulty,
+          value: d.totalFailures || 0
+        }))
+      }
     ];
-  
-    // Verifica los datos procesados antes de asignarlos al gráfico
-    console.log('Datos procesados para el gráfico:', this.multiDifficulties);
   }
-  
-    
+
+  private buildGamesSeries(gamesData: GamesPlayedStatsResponse[]): void {
+    this.multiGames = [
+      {
+        name: 'Partidas jugadas',
+        series: gamesData.map((g) => ({
+          name: g.month,
+          value: g.gamesCount
+        }))
+      }
+    ];
+  }
+
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
@@ -122,49 +140,4 @@ export class StatsComponent {
   onDeactivate(data: any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-
-// Datos de prueba
-private testData: MonthStatsDto[] = [
-  {
-    month: 'ENERO',
-    totalMonthQuestionsAnswered: 10,
-    totalMonthSuccesses: 7,
-    totalMonthFailures: 3,
-    successMonthRate: 70,
-    failureMonthRate: 30
-  },
-  {
-    month: 'FEBRERO',
-    totalMonthQuestionsAnswered: 15,
-    totalMonthSuccesses: 12,
-    totalMonthFailures: 3,
-    successMonthRate: 80,
-    failureMonthRate: 20
-  },
-  {
-    month: 'MARZO',
-    totalMonthQuestionsAnswered: 8,
-    totalMonthSuccesses: 5,
-    totalMonthFailures: 3,
-    successMonthRate: 62.5,
-    failureMonthRate: 37.5
-  },
-  {
-    month: 'ABRIL',
-    totalMonthQuestionsAnswered: 20,
-    totalMonthSuccesses: 15,
-    totalMonthFailures: 5,
-    successMonthRate: 75,
-    failureMonthRate: 25
-  },
-  {
-    month: 'MAYO',
-    totalMonthQuestionsAnswered: 6,
-    totalMonthSuccesses: 4,
-    totalMonthFailures: 2,
-    successMonthRate: 66.67,
-    failureMonthRate: 33.33
-  },
-];
-
 }

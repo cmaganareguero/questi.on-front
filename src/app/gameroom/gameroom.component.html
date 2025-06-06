@@ -1,100 +1,162 @@
+<div class="gamezone" *ngIf="currentGame">
+  <div class="header-section">
+    <div class="back-content">
+      <h1>QUESTI.ON</h1>
+    </div>
+    <div class="other">
+      <h1>{{ currentIndex + 1 }}/{{ currentGame.numQuestions }}</h1>
+    </div>
+  </div>
 
-    
-    <div class="gamezone">
-      @if (currentGame) {
-    
-        <!-- <div class="category">
-            <h1> {{ currentGame.category }} </h1>
-        </div> -->
+  <div class="container">
+    <mat-card class="card-game-container">
 
-        <div class="header-section">
-          <div class="back-content">
-            <h1>QUESTI.ON</h1>
-          </div>
-
-          <div class="other">
-            <button mat-button> SALIR </button>
-            <h1>{{  + 1 }}/{{ currentGame?.numQuestions }}</h1>
-          </div>
+      <!-- IZQUIERDA: Botón “SALIR” (solo mientras haya pregunta activa) -->
+      <div class="left">
+                <!-- Etiqueta de Categoría -->
+        <div
+          class="game-category"
+          [title]="currentGame.category"
+          *ngIf="currentGame?.category"
+        >
+          {{ currentGame.category | uppercase }}
         </div>
-  
-    
-        <mat-card class="card-game-container">
-          <div class="left" *ngIf="currentGame">
-            <h3 class="game-category">{{ currentGame.category | uppercase}} </h3>
-            <h3 class="game-difficulty">{{ currentGame.difficulty | uppercase }}</h3>
-          </div>
-          <div class="right">
-              <div class="card-title">{{ currentQuestion ? currentQuestion.question : 'Preguntas' }}</div>
-            <mat-card-content>
-              @if(currentQuestion) {
-                <div class="answers-container">
-                      @for(option of currentQuestion.answers; track option.length) {
-                        <button mat-button (click)="selectOption(option)" [disabled]="selectedOption !== null"
-                        [ngClass]="{'correct': isCorrectOption(option), 'incorrect': isIncorrectOption(option)}">
-                          {{ option }}
-                        </button>
-                      }
+
+        <!-- Etiqueta de Dificultad -->
+        <div
+          class="game-difficulty"
+          *ngIf="currentGame?.difficulty"
+          [ngClass]="{
+            'facil': currentGame.difficulty === 'facil',
+            'media': currentGame.difficulty === 'media',
+            'dificil': currentGame.difficulty === 'dificil'
+          }"
+        >
+          {{ currentGame.difficulty | uppercase }}
+        </div>
+
+        <!-- Botón SALIR solo si hay pregunta activa -->
+        <button
+          *ngIf="currentQuestion"
+          mat-raised-button
+          class="next-button exit-button"
+          (click)="openConfirmDialog('/dashboard')"
+        >
+          <mat-icon>arrow_back</mat-icon>
+          SALIR
+        </button>
+      </div>
+
+      <!-- DERECHA: preguntas / gameOver -->
+      <div class="right">
+        <div class="card-title">
+          <h2>
+            {{ currentQuestion ? currentQuestion.question : 'PARTIDA FINALIZADA' }}
+          </h2>
+        </div>
+
+        <mat-card-content>
+          <!-- Si hay pregunta activa, mostrar opciones -->
+          <ng-container *ngIf="currentQuestion; else gameOverTemplate">
+            <div class="answers-container">
+              <button
+                *ngFor="let option of currentQuestion.answers"
+                (click)="selectOption(option)"
+                [disabled]="selectedOption !== null"
+                [ngClass]="{
+                  correct:
+                    selectedOption !== null &&
+                    option ===
+                      currentQuestion.answers[
+                        currentQuestion.correctAnswerIndex
+                      ],
+                  incorrect:
+                    selectedOption === option &&
+                    option !==
+                      currentQuestion.answers[
+                        currentQuestion.correctAnswerIndex
+                      ]
+                }"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </ng-container>
+
+          <!-- Template para estado Game Over -->
+          <ng-template #gameOverTemplate>
+            <div class="game-over-container">
+
+              <div class="results-row">
+                <div class="result-box aciertos-box">
+                  <span class="result-label">Aciertos</span>
+                  <h2 class="result-value">{{ successes }}</h2>
                 </div>
-              }
-              @if(!currentQuestion) {
-                <div class="next-question-container">
-                  <div>
-                    <mat-card-title>Partida finalizada.</mat-card-title>
-                    <mat-card-title>Aciertos: {{successes}}</mat-card-title>
-                    <mat-card-title>Fallos: {{currentGame.numQuestions - successes}}</mat-card-title>
-                  </div>
-                  <button mat-button (click)="startNewGame()">Nueva partida</button>
+                <div class="result-box fallos-box">
+                  <span class="result-label">Fallos</span>
+                  <h2 class="result-value">
+                    {{ currentGame.numQuestions - successes }}
+                  </h2>
                 </div>
-              }
-            </mat-card-content>
-            <div class="game-buttons">
+              </div>
+
+              <div class="volver">
+                <button mat-raised-button class="home-button" (click)="goHome()">
+                  SALIR
+                </button>
+              </div>
 
             </div>
+          </ng-template>
+        </mat-card-content>
+
+        <!-- Info-zone: Solo mostrar cuando haya pregunta activa -->
+        <div class="info-zone" *ngIf="currentQuestion">
+          <div class="info-buttons">
+            <button
+              mat-raised-button
+              class="next-button"
+              (click)="nextQuestion()"
+              [disabled]="!selectedOption"
+            >
+              Siguiente pregunta
+            </button>
+            <button
+              mat-icon-button
+              aria-label="Obtener información"
+              class="info-button"
+              (click)="getMoreInfo()"
+              [disabled]="!selectedOption"
+            >
+              <mat-icon>help_outline</mat-icon>
+            </button>
           </div>
+        </div>
+      </div>
+
+      <!-- Info adicional (solo si hay info y pregunta activa) -->
+      <div
+        class="additional-info-card"
+        *ngIf="currentQuestion && additionalInfo"
+      >
+        <mat-card>
+          <div class="card-header">
+            <span class="card-title">
+              <h2>
+                Respuesta correcta:
+                {{ currentQuestion.answers[currentQuestion.correctAnswerIndex] }}
+              </h2>
+            </span>
+            <button mat-icon-button class="close-btn" (click)="closeMoreInfo()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <mat-card-content>
+            {{ additionalInfo }}
+          </mat-card-content>
         </mat-card>
-      }
-    
-      <!-- @if (!showQuestions || !currentGame) {
-        <div>
-          <p>No se han cargado preguntas todavía.</p>
-        </div>
-      } -->
+      </div>
 
-      <!-- <div class="info-zone">
-        <div class="progress-container">
-          <div class="progress-circle">
-            {{  + 1 }}/{{ currentGame?.numQuestions }}
-          </div>
-        </div>
-  
-        <div class="info-buttons">
-          <button
-          mat-raised-button
-          class="next-button"
-          (click)="nextQuestion()"
-          [disabled]="!selectedOption"
-          >
-          Siguiente pregunta
-          </button>
-          <button
-            mat-raised-button
-            class="info-button"
-            (click)="getMoreInfo()"
-            [disabled]="!selectedOption"
-          >
-            Obtener información adicional
-          </button>
-        </div>
-        
-        <div class="addittional-info-container">
-          <div class="additional-info" *ngIf="additionalInfo">
-            <h3>
-              {{ additionalInfo }}
-            </h3> 
-          </div>
-        </div>
-      </div>   -->
-    </div> 
-
-    
+    </mat-card>
+  </div>
+</div>

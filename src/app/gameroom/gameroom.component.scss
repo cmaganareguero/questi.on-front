@@ -1,112 +1,141 @@
 * {
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
 }
 
-  .gamezone {
-    height: 100vh;
-    width: 100%;
+.gamezone {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url('/assets/gameroom.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+  .header-section {
+    height: 15vh;
+    width: 73%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-image: url('/assets/gameroom.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  
-    // .category {
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    //   height: 14%;
-    //   width: 73%;
-    //   background-color: #88b3c5;
-  
-    //   h1{
-    //     margin: 0px;
-    //     color: #ffffff;
-    //   }
-    // }
+    justify-content: space-around;
 
-    .header-section {
-      position: relative;
-      //background-color: #bee3f8; // Azul fuerte
-      height: 10vh;
-      width: 73%;
+    .back-content {
+      padding-top: 30px;
       display: flex;
-      //flex-direction: column;
-      justify-content: space-around;
-      z-index: 1;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      height: 100%;
+      width: 50%;
 
-      .back-content {
-        padding-top: 30px;
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: row;
-        height: 15%;
-        width: 50%;
-        h1{
-          font-weight: bold;
-          font-size: 40px;
-          color: #000000; 
-        }
-     }
+      h1 {
+        font-weight: bold;
+        font-size: 40px;
+        color: #000000;
+      }
+    }
 
     .other {
-        padding-top: 30px;
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: row;
-        height: 15%;
-        width: 50%;
-          h1{
-            font-weight: bold;
-            font-size: 40px;
-            color: #2c3748; 
-          }
+      //padding-top: 30px;
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: row;
+      height: 100%;
+      width: 50%;
+
+      h1 {
+        font-weight: bold;
+        font-size: 40px;
+        color: #2c3748;
+      }
     }
   }
-  
-  
+
+  .container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
     .card-game-container {
       display: flex;
       align-items: center;
       flex-direction: row;
-      height: 75%;
+      height: 90%;
       width: 73%;
-      overflow-y: auto;
-      overflow-x: hidden;
-      //background-color: green;
+      //padding-bottom: 50px;
+      overflow: visible !important;
 
       .left {
         display: flex;
-        justify-content: flex-start;  // antes era center
-        align-items: flex-start; 
+        justify-content: flex-start;
+        align-items: flex-start;
         flex-direction: column;
-        width: 20%;
+        width: 13%;
         height: 100%;
 
+        .exit-button {
+          margin-top: auto;
+          margin-left: 30px;
+          margin-bottom: 30px;
 
-         .game-category {
-            padding: 4px 8px;
-            background-color: #88b3c5;
-            color: #000000;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 500;
-            margin: 30px;
-            margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          /* ===== Estilos idénticos a .home-button en el game-over ===== */
+          background-color: #88b3c5;    /* mismo verde claro que tenías en home-button */
+          color: #f0f0f0;               /* mismo texto blanco */
+          font-size: 1rem;
+          font-weight: 500;
+          min-width: 130px;             /* mismo ancho mínimo que home-button */
+          border-radius: 4px;           /* conservar el borde redondeado */
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); /* opcional: si home-button tenía sombra */
+
+          mat-icon {
+            font-size: 20px;
+            line-height: 1;
+            color: #f0f0f0;            /* icono blanco como el texto */
           }
-          .game-difficulty {
-            margin: 30px;
-            margin-top: 0px;
-            padding: 4px 8px;
-            background-color: #88b3c5;
-            color: #000000;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 500;
-          }
+          /* ============================================================ */
+        }
+
+        .game-category {
+          padding: 4px 8px;
+          background-color: #e2e8f0;
+          color: #000000;
+          border-radius: 4px;
+          font-size: 1rem;
+          font-weight: 500;
+          margin: 30px;
+          margin-bottom: 10px;
+        }
+
+        .game-difficulty {
+          margin: 30px;
+          margin-top: 0px;
+          padding: 4px 8px;
+          color: #000000;
+          border-radius: 4px;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+
+        .game-difficulty.facil {
+          background-color: #a5d6a7; /* verde claro */
+        }
+
+        .game-difficulty.media {
+          background-color: #fff59d; /* amarillo claro */
+        }
+
+        .game-difficulty.dificil {
+          background-color: #ef9a9a; /* rojo claro */
+        }
       }
 
       .right {
@@ -114,12 +143,13 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 80%;
+        position: relative;
+        width: 85%;
         height: 100%;
 
         .card-title {
-          width: 100%;
-          height: 20%;
+          width: 80%;
+          height: 15%;
           margin-top: 30px; /* Ajusta el espacio desde el top */
           margin-bottom: 20px; /* Ajusta el espacio desde el top */
           text-align: center; /* Centra el texto horizontalmente */
@@ -127,39 +157,155 @@
           justify-content: center;
           align-items: center;
         }
-    
+
         .mat-mdc-card-content {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           align-items: center;
-          width: 100%;
+          width: 80%;
           height: 40%;
         }
-    
+
         .answers-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
-          grid-template-rows: auto auto;  /* 2 filas automáticas */
-          width: 80%;
-          height: 100%; /* Resta el espacio reservado para el botón */
-          align-items: center;
-          justify-items: center; /* Centra los elementos en cada celda */
-          gap: 8px; /* Espaciado uniforme entre filas y columnas */
+          display: flex;
+          flex-wrap: wrap;           /* Permite varias filas cuando no caben en una */
+          gap: 12px;                 /* Espacio uniforme entre botones */
+          width: 100%;
+          justify-content: center;   /* Centra las filas Horizontalmente */
+          margin-bottom: 24px;
 
           button {
-            width: 80%; /* Ocupa el 100% de la celda */
-            height: 30%;
-            max-width: 100%; /* Asegura que el botón no sobresalga */
-            padding: 10px;
-            background-color: #88b3c5;
-            color: #FFFFFF;
-            text-align: center;
-            word-wrap: break-word;
-            transition: transform 0.3s ease; /* Transición para hover */
+              flex: 1 1 45%;           /* base: 45% de contenedor,grow=1,shrink=1 */
+              min-width: 200px;        /* Nunca menos de 200px de ancho (ajusta si quieres) */
+              /* Ahora forzamos una altura mínima igual para todos: */
+              min-height: 80px;        /* Ajusta este valor según el botón más alto que necesites */
+
+              /* Centramos el texto dentro del botón y permitimos multilinea */
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              white-space: normal;
+              word-wrap: break-word;
+              text-align: center;
+
+              /* Espacio interno para que el texto respire */
+              padding: 12px 16px;
+
+              /* Estilos visuales básicos */
+              background-color: #e2e8f0;
+              color: #000;
+              font-family: Roboto, "Helvetica Neue", sans-serif;
+              font-size: 0.875rem;    /* 14px */
+              font-weight: 500;
+              letter-spacing: 0.0892857em;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              transition: background-color 0.2s ease, transform 0.1s ease;
+
+              /* Si el botón está deshabilitado */
+              &:disabled {
+                background-color: #cfd4db;
+                color: #777;
+                cursor: not-allowed;
+              }
+
+              /* Hover / Active */
+              &:not(:disabled):hover {
+                background-color: #d0d7e1;
+                transform: translateY(-1px);
+              }
+              &:not(:disabled):active {
+                background-color: #b8c2cb;
+                transform: translateY(0);
+              }
+
+              /* Estados correct / incorrect */
+              &.correct {
+                background-color: #8bc34a;
+                color: #fff;
+              }
+              &.incorrect {
+                background-color: #e57373;
+                color: #fff;
+              }
+            }
+          }
+
+        /* Estilos para el estado "Partida finalizada" */
+        .game-over-container {
+          display: flex;
+          height: 100%;
+          width: 80%;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          text-align: center;
+
+          .volver {
+            margin-top: 16px;
           }
         }
-    
+
+        .game-over-container .final-title {
+          font-size: 1.8rem;
+          font-weight: 600;
+          margin-bottom: 16px;
+          color: rgba(0, 0, 0, 0.87);
+        }
+
+        .game-over-container .results-row {
+          display: flex;
+          gap: 16px;
+          margin-bottom: 24px;
+        }
+
+        .game-over-container .result-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 12px 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+          min-width: 120px;
+
+          .result-label {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: rgba(0, 0, 0, 0.6);
+          }
+
+        }
+
+        .game-over-container .aciertos-box {
+          background-color: #e8f5e9; /* verde muy claro */
+        }
+
+        .game-over-container .aciertos-box .result-value {
+          color: #2c3748; /* verde oscuro */
+          margin: 0px;
+        }
+
+        .game-over-container .fallos-box {
+          background-color: #ffebee; /* rojo muy claro */
+        }
+
+        .game-over-container .fallos-box .result-value {
+          color: #2c3748; /* rojo oscuro */
+          margin: 0px;
+        }
+
+        .game-over-container .home-button {
+          min-width: 150px;
+          font-size: 1rem;
+          font-weight: 500;
+          background-color: #88b3c5;
+          color: #f0f0f0;
+        }
+
         .next-question-container {
           display: flex;
           justify-content: space-between;
@@ -170,124 +316,125 @@
           text-align: center;
           padding-bottom: 65px;
         }
-    
+
         .next-question-container button {
           width: auto;
         }
-      } 
-    }
-  }
-  
-  button.correct {
-    background-color: green !important;
-  }
-  
-  button.incorrect {
-    background-color: red !important;
-  }
-  
-  .example-h2 {
-    margin: 10px;
-  }
-  
-  .example-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
-  }
-  
-  .example-margin {
-    margin: 0 10px;
-  }
-  
-  .example-card {
-    margin-bottom: 10px;
-  }
-
-  .info-zone {
-    height: 100%;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 16px;
-
-    .progress-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 20%;
-      text-align: center;
-
-      .progress-circle {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background-color: transparent; 
-        border: 5px solid #88b3c5; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 25px;
-        margin-bottom: 16px;
       }
-      
 
-      .next-button,
-      .info-button {
+      .info-zone {
+        height: 20%;
         width: 100%;
-        margin-bottom: 12px;
-        background-color: #f5f5f5;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        &:disabled {
-          background-color: #e0e0e0;
-          color: #999;
+        .info-buttons {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .next-button {
+          min-width: 160px;
+        }
+
+        .info-button {
+          width: 30px;
+          height: 30px;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          mat-icon {
+            font-size: 24px;
+            line-height: 1;
+            color: #aaa;
+          }
+
+          &:not([disabled]) {
+            mat-icon {
+              color: #4299e1;
+            }
+          }
         }
       }
 
-      .additional-info {
-        margin-top: 16px;
-        padding: 12px;
+      .additional-info-card {
+        position: fixed;
+        top: 47%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        height: 300px;
+        width: 400px;
 
+        mat-card {
+          border-radius: 8px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          min-width: 280px;
+          background-color: #f0f0f0; /* Gris por defecto */
+          transition: background-color 0.2s ease-in-out;
+
+          &.enabled {
+            background-color: #e3f2fd; /* Azul suave cuando está “activo” */
+          }
+
+          .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+            h2 {
+              padding: 0px;
+            }
+
+            .card-title {
+              font-weight: 600;
+            }
+            .close-btn {
+              line-height: 1;
+            }
+          }
+
+          mat-card-content {
+            padding: 16px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+          }
+        }
       }
     }
 
-    .info-buttons {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      width: 100%;
-      height: 20%;
-      text-align: center;
-      flex-direction: column;
+    button.correct {
+      background-color: rgb(137, 201, 110) !important;
     }
 
-    .addittional-info-container{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80%;
-      height: 50%;
-
-      .additional-info{
-        display: flex;
-        justify-content: center; /* Centra el contenido horizontalmente */
-        align-items: center; /* Centra el contenido verticalmente */
-        height: 90%;
-        width: 80%;
-        background-color: #f9f9f9;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 20px; /* Añade espacio alrededor del texto */
-        text-align: center; /* Centra el texto horizontalmente */
-      }
+    button.incorrect {
+      background-color: rgb(216, 81, 81) !important;
     }
 
+    .example-h2 {
+      margin: 10px;
+    }
+
+    .example-section {
+      display: flex;
+      align-content: center;
+      align-items: center;
+      height: 60px;
+    }
+
+    .example-margin {
+      margin: 0 10px;
+    }
+
+    .example-card {
+      margin-bottom: 10px;
+    }
   }
-
-
-
+}

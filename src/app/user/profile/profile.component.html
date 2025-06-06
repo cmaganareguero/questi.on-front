@@ -5,75 +5,41 @@
 </div>
 
 <div class="profile-container">
-  
-  <mat-card class="modify-card">
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-
-      <!-- Título de la sección -->
-      <div class="modify-header">
-        <h2>MI CUENTA</h2>
-      </div>
-
-      <!-- Campos del formulario -->
-      <div class="form-fields">
-        <!-- Correo electrónico -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Correo electrónico</mat-label>
-          <input matInput placeholder="usuario@ejemplo.com" formControlName="email">
-          <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
-            {{ getEmailError() }}
-          </mat-error>
-        </mat-form-field>
-
-        <!-- Separador -->
-        <mat-divider></mat-divider>
-
-        <!-- Sobre mí -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Sobre mí</mat-label>
-          <textarea
-            matInput
-            placeholder="Cuéntanos un poco sobre ti"
-            formControlName="aboutMe"
-            rows="4">
-          </textarea>
-          <mat-error *ngIf="aboutMe.invalid && (aboutMe.dirty || aboutMe.touched)">
-            {{ getAboutMeError() }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Botón de guardar -->
-      <div class="button-row">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="profileForm.invalid">
-          Guardar
-        </button>
-      </div>
-    </form>
-  </mat-card>
-
   <mat-card class="profile-card">
     <div class="profile-header">
       <div class="profile-photo">
-        <img src="assets/images/defaultUser.png" />
+        <img src="assets/defaultUser.png" alt="Foto de perfil">
       </div>
     </div>
-    
+
     <div class="profile-info">
-      <h2 class="username">Jenna Stones</h2>
-      <p class="location">Los Angeles, California</p>
-      <p class="job-title">Solution Manager - Creative Tim Officer</p>
-      <p class="education">University of Computer Science</p>
-      <p class="bio">
-        An artist of considerable range, Jenna the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-        writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure.
-        An artist of considerable range.
-      </p>
-      <button mat-raised-button color="primary" class="connect-btn">Connect</button>
+      <div class="user-detail">
+        <h2 class="value">{{ profileForm.get('name')?.value }}</h2>
+      </div>
+
+      <div class="user-detail">
+        <h2 class="value">{{ profileForm.get('email')?.value }}</h2>
+      </div>
+      <mat-divider></mat-divider>
     </div>
+
+      <div class="additional-info">
+        <h2>Sobre ti</h2>
+        <p>
+          Apasionado por los juegos de preguntas y desarrollo de software. Me encanta aprender cosas nuevas y compartir conocimientos.
+        </p>
+
+      </div>
+
+      <div class="buttons">
+        <div class="links-row">
+          <button mat-button class="stats-btn" (click)="navigateToStatsroom()">
+            <i class="fas fa-chart-line"></i> Mis Estadisticas
+          </button>
+          <button mat-button class="dashboard-btn" (click)="navigateToDashboard()">
+            <i class="fas fa-home"></i> Volver al Inicio
+          </button>
+        </div>
+      </div>
   </mat-card>
 </div>

@@ -4,7 +4,7 @@ import { catchError, expand, map, reduce, switchMap, tap } from 'rxjs/operators'
 import { Observable, forkJoin, of } from 'rxjs';
 import { MessageService } from './messages.service';
 import { FinishedGame, GameData, Question } from '../app/interfaces';
-import { DifficultyStatsDto, DifficultyStatsResponse, MonthStatsDto, StatsData } from '../app/interfaces/stats.interface';
+import { DifficultyStatsDto, DifficultyStatsResponse, GamesPlayedStatsResponse, MonthStatsDto, StatsData, StatsGeneralesDto } from '../app/interfaces/stats.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class GameService {
      answerType: '',
      numQuestions: 0
    };
-  
+
    games: GameData[] = [];
 
    httpOptions = {
@@ -31,13 +31,13 @@ export class GameService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  getLastGame(idUser: string): Observable<GameData> {
-    const url = `${this.url}/getLastGame?idUser=${idUser}`;
+  getLastGame(idUser: string, category: string): Observable<GameData> {
+    const url = `${this.url}/getLastGame?idUser=${idUser}&category=${category}`;
     return this.http.get<GameData>(url);
   }
 
-  deleteLastGame(userId: string): Observable<GameData> {
-    const url = `${this.url}/lastGame/${userId}`;
+  deleteLastGame(userId: string, category: string): Observable<GameData> {
+    const url = `${this.url}/lastGame/${userId}?category=${category}`;
     return this.http.delete<GameData>(url);
   }
 
@@ -49,21 +49,40 @@ export class GameService {
     );
   }
 
-  getMonthlyStatistics(idUser: string): Observable<MonthStatsDto> {
-    const url = `${this.url}/getMonthlyStatistics?idUser=${idUser}`;
-    return this.http.get<MonthStatsDto>(url);
-  }
+  // getMonthlyStatistics(idUser: string): Observable<MonthStatsDto> {
+  //   const url = `${this.url}/getMonthlyStatistics?idUser=${idUser}`;
+  //   return this.http.get<MonthStatsDto>(url);
+  // }
 
   getDifficultyStatistics(idUser: string): Observable<DifficultyStatsResponse> {
     const url = `${this.url}/getStatisticsByDifficulty?idUser=${idUser}`;
     return this.http.get<DifficultyStatsResponse>(url);
-  }  
+  }
+
+  getGamesPlayedStatistics(idUser: string): Observable<GamesPlayedStatsResponse[]> {
+    const url = `${this.url}/gamesPlayedStats?idUser=${idUser}`;
+    return this.http.get<GamesPlayedStatsResponse[]>(url);
+  }
+
+  getTotalsStatistics(idUser: string): Observable<StatsGeneralesDto> {
+    const endpoint = `${this.url}/getTotalsStatistics?idUser=${idUser}`;
+    return this.http.get<StatsGeneralesDto>(endpoint).pipe(
+      catchError(this.handleError<StatsGeneralesDto>('getTotalsStatistics'))
+    );
+  }
+
+  getMonthlySuccessFailure(idUser: string): Observable<MonthStatsDto[]> {
+    const endpoint = `${this.url}/getMonthlySuccessFailure?idUser=${idUser}`;
+    return this.http.get<MonthStatsDto[]>(endpoint).pipe(
+      catchError(this.handleError<MonthStatsDto[]>('getMonthlySuccessFailure', []))
+    );
+  }
 
   getUserGames(idUser: string): Observable<FinishedGame[]> {
     const url = `${this.url}/getUserGames?idUser=${idUser}`;
     return this.http.get<FinishedGame[]>(url);
   }
-    
+
         /**
   * Handle Http operation that failed.
   * Let the app continue.
@@ -80,10 +99,10 @@ export class GameService {
             return of(result as T);
           };
         }
-      
+
         /** Log a RutinaService message with the MessageService */
         private log(message: string) {
           this.messageService.add(`RutinaService: ${message}`);
         }
-  
+
 }

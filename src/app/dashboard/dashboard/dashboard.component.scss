@@ -9,7 +9,7 @@
   height: 100vh;
   width: 100%;
   background-color: #ffffff;
-  
+
     .info-dialog {
       display: flex;
       align-items: center;
@@ -17,7 +17,7 @@
       height: 80%;
       width: 50%;
       color: #222422;
-  
+
       .text-content {
       display: flex;
       flex-direction: column;
@@ -26,7 +26,7 @@
       width: 60%;
       height: auto;
       padding-left: 20%;
-  
+
       h1 {
         font-size: 1.9rem; /* Tamaño más grande para el encabezado */
         font-weight: bold;
@@ -49,21 +49,21 @@
         border-radius: 5px;
         margin-top: 20px; /* Añadido espacio superior */
       }
-    
+
   }
     }
-  
+
     .img-dialog {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100%;
       width: 50%;
-      
+
       img {
         height: 100%;
         width: 100%;
-        object-fit: cover; 
+        object-fit: cover;
       }
     }
   }
@@ -88,7 +88,7 @@
         width: 33%;
         border-radius: 1rem;
         padding: 20;
-      
+
       .aciertosfallos-tab {
         display: flex;
         flex-direction: column;
@@ -99,7 +99,7 @@
         padding: 15px;
         border-radius: 0.5rem;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra suave */
-      
+
         .aciertosfallos-icon {
           width: 50px;  /* Tamaño del círculo */
           height: 50px;  /* Tamaño del círculo */
@@ -109,24 +109,24 @@
           align-items: center;
           justify-content: center;
           margin-top: 20px;
-          
+
           i {
             color: #ffffff;  /* Color del icono (blanco) */
             font-size: 1.5rem;  /* Tamaño del icono */
           }
         }
-      
+
         .aciertosfallos-text {
           max-width: 80%;  /* Controla el ancho máximo del texto */
           margin-top: 10px;
           margin-bottom: 20px;
-      
+
           h1 {
             text-align: center;  /* Centra el título */
             font-size: 1.25rem;
             margin: 10px 0;
           }
-      
+
           p {
             text-align: justify;  /* Justifica el párrafo */
             font-size: 1rem;
@@ -145,7 +145,7 @@
       width: 33%;
       border-radius: 1rem;
       padding: 20;
-    
+
     .aciertosfallos-tab {
       display: flex;
       flex-direction: column;
@@ -156,34 +156,50 @@
       padding: 15px;
       border-radius: 0.5rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra suave */
-    
+
       .aciertosfallos-icon {
         width: 50px;  /* Tamaño del círculo */
         height: 50px;  /* Tamaño del círculo */
         border-radius: 50%;  /* Hacer el círculo redondo */
-        background-color: #4299e1;  /* Fondo azul */
+        background-color: #e14242;  /* Fondo azul */
         display: flex;
         align-items: center;
         justify-content: center;
         margin-top: 20px;
-        
+
         i {
           color: #ffffff;  /* Color del icono (blanco) */
           font-size: 1.5rem;  /* Tamaño del icono */
         }
       }
-    
+
+        .aciertosfallos-icon-user {
+          width: 50px;  /* Tamaño del círculo */
+          height: 50px;  /* Tamaño del círculo */
+          border-radius: 50%;  /* Hacer el círculo redondo */
+          background-color: #42e16c;  /* Fondo azul */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 20px;
+
+          i {
+            color: #ffffff;  /* Color del icono (blanco) */
+            font-size: 1.5rem;  /* Tamaño del icono */
+          }
+        }
+
       .aciertosfallos-text {
         max-width: 80%;  /* Controla el ancho máximo del texto */
         margin-top: 10px;
         margin-bottom: 20px;
-    
+
         h1 {
           text-align: center;  /* Centra el título */
           font-size: 1.25rem;
           margin: 10px 0;
         }
-    
+
         p {
           text-align: justify;  /* Justifica el párrafo */
           font-size: 1rem;
@@ -196,13 +212,13 @@
 
     .nose {
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: center;
       height: 100%;
       width: 33%;
       border-radius: 1rem;
       padding: 20;
-    
+
     .aciertosfallos-tab {
       display: flex;
       flex-direction: column;
@@ -213,34 +229,34 @@
       padding: 15px;
       border-radius: 0.5rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra suave */
-    
+
       .aciertosfallos-icon {
         width: 50px;  /* Tamaño del círculo */
         height: 50px;  /* Tamaño del círculo */
         border-radius: 50%;  /* Hacer el círculo redondo */
-        background-color: #4299e1;  /* Fondo azul */
+        background-color: #82e142;  /* Fondo azul */
         display: flex;
         align-items: center;
         justify-content: center;
         margin-top: 20px;
-        
+
         i {
           color: #ffffff;  /* Color del icono (blanco) */
           font-size: 1.5rem;  /* Tamaño del icono */
         }
       }
-    
+
       .aciertosfallos-text {
         max-width: 80%;  /* Controla el ancho máximo del texto */
         margin-top: 10px;
         margin-bottom: 20px;
-    
+
         h1 {
           text-align: center;  /* Centra el título */
           font-size: 1.25rem;
           margin: 10px 0;
         }
-    
+
         p {
           text-align: justify;  /* Justifica el párrafo */
           font-size: 1rem;
@@ -252,7 +268,7 @@
   }
     }
 
-          
+
     }
 
     .footer {
@@ -266,12 +282,12 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-    
+
       p {
         margin: 5px 0;
         font-size: 1rem;
       }
-    
+
       .social-icons {
         margin: 10px 0;
         font-size: 1.5rem;
@@ -280,7 +296,7 @@
           cursor: pointer;
         }
       }
-    
+
       .separator {
         width: 90%;  /* Ajusta el porcentaje según el tamaño que desees */
         height: 1px;  /* Altura de la línea */
@@ -288,18 +304,12 @@
         margin-bottom: 15px;  /* Espacio debajo de la línea */
       }
     }
-    
+
     .fab {
       color: #f1f1f1;
       transition: color 0.3s ease;
-    
+
       &:hover {
         color: #4299e1;
       }
     }
-    
-    
-
-
-
-

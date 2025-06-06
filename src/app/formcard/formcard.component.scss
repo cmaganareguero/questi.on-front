@@ -1,82 +1,73 @@
 .register {
+  display: flex;
+  flex-direction: column;
+  background-color: #ececec;
+  height: 100%;
+  width: 100%;
+
+  .register-title {
     display: flex;
     flex-direction: column;
-    background-color: #ececec;
-    height: 100%;
-    width: 100%;
-  
-    .register-title {
+    height: 20%;
+    align-items: flex-start;
+    padding-top: 30px;
+    padding-left: 30px;
+
+    mat-card-title {
+      font-size: 25px;
+      color: #000000ea;
+      margin-bottom: 10px;
+    }
+    mat-card-subtitle {
+      font-size: 19px;
+      color: #000000ea;
+    }
+  }
+
+  form {
+    display: flex;
+    height: 40%;
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .input-container {
       display: flex;
       flex-direction: column;
-      height: 20%;
       align-items: flex-start;
-      padding-top: 30px;
-      padding-left: 30px;
+      margin-bottom: 20px;
+      max-width: 600px;
 
-      mat-card-title{
-        font-size: 25px;
-        color: #000000ea;
-        margin-bottom: 10px;
-      }
-      mat-card-subtitle {
-        font-size: 19px;
-        color: #000000ea;
-      }
-    }
-    
-    form {
-      display: flex;
-      height: 40%;
-      flex-direction: column;
-      padding: 10px 20px;
-    }
-  
-    .form-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 10px;
-
-      .mat-form-field {
-        width: 100%; /* Asegura que los campos de formulario ocupen todo el ancho de su contenedor */
+      p {
+        margin-bottom: 5px;
       }
 
-      .input-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 20px; /* Espacio inferior entre cada campo de formulario */
-        max-width: 600px;
-
-        mat-radio-group {
-          display: flex;
-          flex-direction: row;
-        }
-      }
-
-      .input-container-second {
+      mat-radio-group {
         display: flex;
         flex-direction: row;
-        align-items: flex-start;
-        margin-bottom: 20px; /* Espacio inferior entre cada campo de formulario */
-        max-width: 400px;
-      }
-      
-      .input-container p {
-        margin-bottom: 5px; /* Espacio inferior entre el título y el campo de formulario */
-      }
-    }
-    
-    .register-button-container {
-      display: flex;
-      height: 20%;
-      justify-content: flex-end;
-      align-items: end;
-      padding-right: 50px;
-      button {
-        background-color: #527d93;
-        color: #ffff;
       }
     }
   }
-  
+
+  .register-button-container {
+    display: flex;
+    height: 20%;
+    justify-content: flex-end;
+    align-items: end;
+    padding-right: 50px;
+    button {
+      background-color: #527d93;
+      color: #fff;
+    }
+  }
+}

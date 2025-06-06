@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { StatsComponent } from '../stats/stats.component';
 import { GameService } from '../../services/game.service';
 import { HttpClientModule } from '@angular/common/http';
-import { DifficultyStatsDto, DifficultyStatsResponse, MonthStatsDto, StatsData } from '../interfaces/stats.interface';
+import { DifficultyStatsDto, DifficultyStatsResponse, GamesPlayedStatsResponse, MonthStatsDto, StatsData, StatsGeneralesDto } from '../interfaces/stats.interface';
 import { MatIconModule} from '@angular/material/icon';
 import {RouterModule} from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { AuthorizationService } from '../../services/authorization.service';
 
 @Component({
   selector: 'app-statsroom',
@@ -14,66 +15,46 @@ import {MatCardModule} from '@angular/material/card';
   styleUrl: './statsroom.component.scss',
   standalone: true,
   imports:[StatsComponent,MatCardModule, HttpClientModule, MatIconModule, RouterModule, MatButtonModule],
-  providers: [GameService]
+  providers: [GameService, AuthorizationService]
 })
 export class StatsroomComponent {
+ public isBrowser = true;
  username : string = '';
   @Input() profilePicUrl: string = '/assets/defaultUser.png'; // Ruta de la imagen
   mothStatsData: MonthStatsDto[] = [];
   difficultyStatsData: DifficultyStatsDto[] = [];
+  gameMothStatsData: GamesPlayedStatsResponse[] = [];
+  userId!: string | '';
+  totalGames: number = 0;
+  totalSuccesses: number = 0;
+  totalFailures: number = 0;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private authService: AuthorizationService) {}
 
   ngOnInit(): void {
-    const userId = 'c8043065-5806-428a-a722-8a91f1bf4862'; // Cambia esto según tu lógica
+    this.userId = this.authService.getUserIdFromToken(); // Cambia esto según tu lógica
     console.log('Hola');  // Aquí se imprimen los datos en la consola
-    this.gameService.getMonthlyStatistics(userId).subscribe({
-        next: data => {
-            console.log('Datos recibidos de getMonthlyStatistics:', data);
-            if (!Array.isArray(data)) {
-                console.error('Los datos recibidos no son un array:', data);
-                this.mothStatsData = this.getTestMonthData(); // Manejar caso de error
-                return;
-            }
 
-            // Usamos reduce para crear un objeto con los datos
-            const monthDataMap = data.reduce((acc, item) => {
-                if (item && item.month) {
-                    acc[item.month] = {
-                        totalMonthQuestionsAnswered: item.totalQuestionsAnswered || 0,
-                        totalMonthSuccesses: item.totalSuccesses || 0,
-                        totalMonthFailures: item.totalFailures || 0,
-                        successMonthRate: item.successRate || 0,
-                        failureMonthRate: item.failureRate || 0
-                    };
-                }
-                return acc;
-            }, {});
+    //PARTIDAS JUGADAS POR MES
+    this.getMonthGamesData();
 
-            // Obtenemos todos los meses hasta el actual
-            const allMonths = this.getAllMonthsUntilCurrent();
+    //ESTADISTICAS GENERALES
+    this.gameService.getTotalsStatistics(this.userId).subscribe({
+      next: (stats: StatsGeneralesDto) => {
+        this.totalGames = stats.totalGames;
+        this.totalSuccesses = stats.totalSuccesses;
+        this.totalFailures = stats.totalFailures;
+      },
+      error: (err) => {
+        console.error('Error al obtener totales generales:', err);
+      }
+    });
 
-            // Creamos los datos completos para los meses
-            this.mothStatsData = allMonths.map(month => ({
-                totalMonthQuestionsAnswered: monthDataMap[month]?.totalMonthQuestionsAnswered || 0,
-                totalMonthSuccesses: monthDataMap[month]?.totalMonthSuccesses || 0,
-                totalMonthFailures: monthDataMap[month]?.totalMonthFailures || 0,
-                successMonthRate: monthDataMap[month]?.successMonthRate || 0,
-                failureMonthRate: monthDataMap[month]?.failureMonthRate || 0,
-                month: month
-            }));
-        },
-        error: err => {
-            console.error('Error al obtener las estadísticas mensuales:', err);
-            // Manejo del error, usando datos de prueba si es necesario
-            this.mothStatsData = this.getTestMonthData(); // Usa tus datos de prueba aquí
-        }
-    }); 
-
-    this.gameService.getDifficultyStatistics(userId).subscribe({
+    // ACIERTOS Y FALLOS POR DIFICULTAS ( FACIL, MEDIA, DIFICIL)
+    this.gameService.getDifficultyStatistics(this.userId).subscribe({
       next: data => {
         console.log('Datos recibidos de getDifficultyStatistics:', data);
-        
+
         // Verificamos que los datos tengan la estructura esperada
         if (data && typeof data === 'object') {
           // Convertimos los datos de dificultad en un formato adecuado
@@ -84,8 +65,16 @@ export class StatsroomComponent {
       },
       error: err => {
         console.error('Error al obtener las estadísticas de dificultad:', err);
-        // Manejo de error, podrías asignar datos de prueba aquí si es necesario
-        this.difficultyStatsData = this.getTestDifficultyData(); // Usa datos de prueba si es necesario
+      }
+    });
+
+    // ESTADISTICAS POR MES ( ACIERTOS Y FALLOS)
+        this.gameService.getMonthlySuccessFailure(this.userId).subscribe({
+      next: (data: MonthStatsDto[]) => {
+        this.mothStatsData = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener aciertos/fallos por mes:', err);
       }
     });
 }
@@ -109,7 +98,7 @@ export class StatsroomComponent {
     return Object.keys(data).map(difficulty => {
       const difficultyData = data[difficulty];
       return {
-        difficulty: difficulty,
+        difficulty: difficulty.toUpperCase(),
         totalQuestionsAnswered: difficultyData.totalQuestionsAnswered || 0,
         totalSuccesses: difficultyData.totalSuccesses || 0,
         totalFailures: difficultyData.totalFailures || 0,
@@ -119,46 +108,17 @@ export class StatsroomComponent {
     });
   }
 
-  private getTestMonthData(): MonthStatsDto[] {
-    return [
-      {
-        month: '2024-05',
-        totalMonthQuestionsAnswered: 10,
-        totalMonthSuccesses: 6,
-        totalMonthFailures: 4,
-        successMonthRate: 60,
-        failureMonthRate: 40,
+private getMonthGamesData(): void {
+  this.gameService.getGamesPlayedStatistics(this.userId)
+    .subscribe({
+      next: (response: GamesPlayedStatsResponse[]) => {
+        // En lugar de mapear a {name,value}, guárdalo tal cual:
+        this.gameMothStatsData = response;
       },
-    ];
-  }
-    
-  private getTestDifficultyData(): DifficultyStatsDto[] {
-    return [
-      {
-        difficulty: 'FACIL',
-        totalQuestionsAnswered: 10,
-        totalSuccesses: 6,
-        totalFailures: 4,
-        successRate: 60,
-        failureRate: 40,
-      },
-      {
-        difficulty: 'MEDIA',
-        totalQuestionsAnswered: 15,
-        totalSuccesses: 8,
-        totalFailures: 7,
-        successRate: 53,
-        failureRate: 47,
-      },
-      {
-        difficulty: 'DIFICIL',
-        totalQuestionsAnswered: 20,
-        totalSuccesses: 12,
-        totalFailures: 8,
-        successRate: 60,
-        failureRate: 40,
-      },
-    ];
-  }
-  
+      error: (err) => {
+        console.error('Error al cargar estadísticas de partidas por mes:', err);
+      }
+    });
+}
+
 }

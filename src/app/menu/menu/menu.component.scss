@@ -1,24 +1,23 @@
-/* menu.component.scss */
 .top-bar {
-  position: fixed; /* Fija la barra superior */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000; /* Asegura que el menú esté por encima del contenido */
+  z-index: 1000;
   padding: 0 24px;
-  height: 64px; /* Ajusta la altura de la barra */
+  height: 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white; /* Fondo blanco para el menú */
-  transition: top 0.3s ease; /* Transición suave para el efecto de desvanecimiento */
+  background-color: white;
+  transition: top 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .app-name {
   font-weight: bold;
   font-size: 18px;
-  color: black; /* El texto de "QUESTI.ON" en negro */
+  color: black;
 }
 
 .example-spacer {
@@ -26,14 +25,62 @@
 }
 
 .perfil-btn {
-  background-color: #6caeda !important; /* Color azul para el botón de 'PERFIL' */
-  color: white !important; /* Texto blanco en el botón de 'PERFIL' */
+  background-color: #6caeda !important;
+  color: white !important;
   &:hover {
-    background-color: #6caeda; /* Un tono más oscuro al pasar el ratón */
+    background-color: #6caeda;
   }
 }
 
-/* Clase que oculta el menú */
+.perfil-btn-stats {
+  margin-right: 15px;
+  background-color: #4299e1 !important;
+  color: white !important;
+  &:hover {
+    background-color: #4299e1;
+  }
+}
+
 .hidden {
-  top: -64px; /* Mueve el menú fuera de la pantalla cuando se hace scroll */
+  top: -64px;
+}
+
+.stats-btn {
+  margin-right: 8px;
+  padding: 0;
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding-right: 5px;
+
+  &:hover, &:focus, &:active {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .aciertosfallos-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #4299e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      color: white !important;
+      font-size: 1.2rem;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  &:focus .aciertosfallos-icon,
+  &:active .aciertosfallos-icon {
+    background-color: #3182ce;
+  }
 }

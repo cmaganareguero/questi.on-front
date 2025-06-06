@@ -27,6 +27,12 @@ export interface MonthStatsDto {
   month: string;  // Representa el mes, por ejemplo "Octubre 2024"
 }
 
+export interface StatsGeneralesDto {
+  totalGames: number;
+  totalSuccesses: number;
+  totalFailures: number;
+}
+
 export interface DifficultyStatsDto {
   difficulty: string;
   totalQuestionsAnswered: number;
@@ -41,6 +47,13 @@ export interface DifficultyStatsResponse {
   dificil: DifficultyStatsDto; // Estadísticas para "Difícil"
   media: DifficultyStatsDto;  // Estadísticas para "Media"
 }
+
+export interface GamesPlayedStatsResponse {
+  month: String;
+  gamesCount: number;
+}
+
+
 
 
 

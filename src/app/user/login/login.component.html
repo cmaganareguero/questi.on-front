@@ -1,69 +1,109 @@
-  <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  </head>
-
-  <div class="login">
-    <div class="login-left">
-      <span class="app-name">QUESTI.ON</span>
-      <span class="example-spacer"></span>
-      
-      <div class="social-icons-top">
-        <i class="fab fa-github"></i>
-        <i class="fab fa-linkedin"></i>
-        <i class="fab fa-twitter"></i>
-      </div>
-    </div>
-
-    <div class="login-right">
-      <mat-card class="loginbox">
-        <div class="login-title">
-          <mat-card-title>INICIO DE SESION</mat-card-title>
-        </div>
-        <hr>
-        <div class="content">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="form-container">
-              <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput placeholder="pat@example.com" formControlName="email" required>
-                @if(loginForm.get('email')?.invalid) {
-                  <mat-error>
-                    ( getErrorMessage(loginForm.get('email') as FormControl) )
-                  </mat-error>
-                }
-
-              </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>Contraseña</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
-                @if(loginForm.get('password')?.invalid) {
-                  <mat-error>
-                    ( getErrorMessage(loginForm.get('password') as FormControl) )
-                  </mat-error>
-                }
-                <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
-                  <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-                </button>
-              </mat-form-field>
-            </div>
-          </form>
-        </div>
-
-        <div class="login-button-container">
-            <button mat-raised-button type="submit">ENTRAR</button>
-            @if(errorMessage) {
-              <div class="error-message">{{ errorMessage }}</div>
-            }
-         </div>
-      </mat-card>
-
-      <div class="registrarse">
-        <a href="/register" class="registrarse-link">Regístrate aquí</a>
-      </div>
-    </div>
-
-    <div class="footer">
-      <div class="separator"></div>  
-      <p>&copy; 2025</p>
+<!-- ==============================
+     login.component.html
+     (usando updateOn: 'blur')
+     ============================== -->
+<div class="login">
+  <div class="login-left">
+    <span class="app-name">QUESTI.ON</span>
+    <span class="example-spacer"></span>
+    <div class="social-icons-top">
+      <i class="fab fa-github"></i>
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-twitter"></i>
     </div>
   </div>
+
+  <div class="login-right">
+    <mat-card class="loginbox">
+      <div class="login-title">
+        <mat-card-title>INICIO DE SESIÓN</mat-card-title>
+      </div>
+      <hr />
+
+      <div class="content">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-container">
+            <!-- ==============
+                 Email (valida on blur)
+                 ============== -->
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="pat@example.com"
+                formControlName="email"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  loginForm.get('email')?.invalid &&
+                  loginForm.get('email')?.touched
+                "
+              >
+                {{ getErrorMessage(loginForm.get('email')) }}
+              </mat-error>
+            </mat-form-field>
+
+            <!-- ==============
+                 Contraseña (valida on change)
+                 ============== -->
+            <mat-form-field appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                formControlName="password"
+                required
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="togglePasswordVisibility()"
+              >
+                <mat-icon>
+                  {{ hide ? 'visibility_off' : 'visibility' }}
+                </mat-icon>
+              </button>
+              <mat-error
+                *ngIf="
+                  loginForm.get('password')?.invalid &&
+                  loginForm.get('password')?.touched
+                "
+              >
+                {{ getErrorMessage(loginForm.get('password')) }}
+              </mat-error>
+            </mat-form-field>
+
+          <div class="error-message-container">
+            <div class="error-message" *ngIf="errorMessage">
+              {{ errorMessage }}
+            </div>
+          </div>
+
+          <div class="login-button-container">
+            <button
+              mat-raised-button
+              type="submit"
+              [disabled]="loginForm.invalid"
+            >
+              ENTRAR
+            </button>
+          </div>
+         </div>
+        </form>
+      </div>
+    </mat-card>
+
+    <div class="registrarse">
+      <a href="/register" class="registrarse-link"
+        >Regístrate aquí</a
+      >
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="separator"></div>
+    <p>&copy; 2025</p>
+  </div>
+</div>
